@@ -15,6 +15,7 @@ export default function NoteKnob(props, { onChange }) {
   const keyNote = val === 0 ? key[11] : key[val - 1];
 
   function handleChange() {
+    console.log();
     const name = props.name;
     props.onChange({ [name]: keyNote });
     // keyNote is the state value to send to the popup.component this.state.note
