@@ -1,0 +1,28 @@
+input {
+  margin: 20px;
+}
+
+button {
+  margin: 20px;
+}
+
+.menu-container {
+  text-align: center;
+  height: auto;
+  width: auto;
+}
+
+.rounded {
+  opacity: 0.9;
+  max-width: 50%;
+  filter: grayscale(70%);
+}
+
+.spin-container {
+  margin-top: 50vh;
+  text-align: center;
+}
+
+.spinner-grow {
+  background-color: #f94b59;
+}

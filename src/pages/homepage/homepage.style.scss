@@ -1,0 +1,42 @@
+.homepage {
+  height: 100.1vh;
+
+  background-image: url("./asset/sk.png");
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-enter {
+  background-color: rgb(0, 0, 0);
+}
+
+.btn-enter {
+  position: absolute;
+  opacity: 0.8;
+  top: 50%;
+  left: 13vw;
+  color: rgb(66, 66, 66);
+  width: inherit;
+  font-weight: 700;
+  font-size: 11vw;
+  padding: 7vw;
+  cursor: pointer;
+  transition: transform 2s, font-weight 2s, color 2s;
+}
+
+.btn-enter:hover {
+  opacity: 0.9;
+  font-weight: 700;
+  color: rgb(196, 196, 196);
+  transform: scale(1, 1);
+  background-color: #3c3c3c;
+  transform: rotate(5deg);
+}
+
+.user-name {
+  opacity: 0.7;
+  color: white;
+  background-color: #3c3c3c;
+}
