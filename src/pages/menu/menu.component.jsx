@@ -58,7 +58,9 @@ export default function MenuPage({ currentUser }) {
       </Col>
       <h1>OR</h1>
       <Col>
-        <Link to={`/session/${currentUser.uid}`}>CREATE A NEW SESSION </Link>
+        <Link to={`/session/${currentUser.uid}`} currentUser={currentUser}>
+          CREATE A NEW SESSION{" "}
+        </Link>
       </Col>
       <h1>OR</h1>
       <div className="option" onClick={() => auth.signOut()}>

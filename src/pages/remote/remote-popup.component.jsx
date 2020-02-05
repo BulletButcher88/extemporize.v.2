@@ -28,7 +28,6 @@ class RemotePopUp extends Component {
       showPopup: !this.state.showPopup
     });
   }
-
   onSubmit() {}
 
   render() {

@@ -11,7 +11,8 @@ class Popup extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      volume: "",
+      stop: Boolean,
+      volume: 5,
       bridge: "",
       style: "...",
       description: "...",
@@ -34,6 +35,7 @@ class Popup extends React.Component {
   }
 
   receiveNote = value => {
+    // console.log(props.currentUser);
     const stepValue = v => Math.round(v * 12) / 12;
     const val = Math.round(stepValue(value) * 12);
     const keyNote = val === 0 ? key[11] : key[val - 1];
@@ -46,6 +48,11 @@ class Popup extends React.Component {
     this.setState({ [name]: value });
   };
 
+  postRequest = props => {
+    console.log(this.state, props);
+    this.props.closePopup();
+  };
+
   render() {
     const { volume, bridge, style, description, note, tempo } = this.state;
     console.log(this.state);
@@ -55,12 +62,12 @@ class Popup extends React.Component {
           {/* <h5>{JSON.stringify(this.props.session)}</h5> */}
           <div className="container">
             <div className="stop">
-              <a className="stop-btn" onClick={this.props.onSubmit}></a>
+              <a className="stop-btn" onClick={this.props.closePopup}></a>
             </div>
             <div className="submit">
               <a
                 className="submit-btn"
-                onClick={this.props.closePopup}
+                onClick={this.postRequest}
                 // onClick={this.props.onSubmit}
               ></a>
             </div>

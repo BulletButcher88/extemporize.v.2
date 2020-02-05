@@ -8,7 +8,7 @@ import "../session/session.style.scss";
 
 const SessionPage = ({ currentUser }) => (
   <div className="session-container">
-    <RemotePopUp />
+    <RemotePopUp currentUser={currentUser} />
   </div>
 );
 
