@@ -14,13 +14,6 @@ export default function NoteKnob(props, { onChange }) {
   const val = Math.round(stepValue(value) * 12);
   const keyNote = val === 0 ? key[11] : key[val - 1];
 
-  function handleChange() {
-    console.log();
-    const name = props.name;
-    props.onChange({ [name]: keyNote });
-    // keyNote is the state value to send to the popup.component this.state.note
-  }
-
   return (
     <>
       <div className="note-wheel">
@@ -34,7 +27,7 @@ export default function NoteKnob(props, { onChange }) {
             value={value}
             radius={60}
             name="note"
-            onChange={handleChange}
+            onChange={() => props.onChange(value)}
           >
             <CircularProgress strokeWidth={2} stroke="rgb(249, 75, 89)" />
             <CircularThumb fill="rgb(249, 75, 89)" />

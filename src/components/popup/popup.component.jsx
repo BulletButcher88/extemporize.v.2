@@ -5,6 +5,8 @@ import "./popup.style.scss";
 // import { ReactComponent as SwitchBackground } from "../../utils/note-background.svg";
 
 const tempo = [];
+const key = ["A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"];
+
 class Popup extends React.Component {
   constructor(props) {
     super(props);
@@ -31,8 +33,15 @@ class Popup extends React.Component {
     this.setState({ tempo: newTempo });
   }
 
+  receiveNote = value => {
+    const stepValue = v => Math.round(v * 12) / 12;
+    const val = Math.round(stepValue(value) * 12);
+    const keyNote = val === 0 ? key[11] : key[val - 1];
+    this.setState({ note: keyNote });
+  };
+
   handleChange = event => {
-    // console.log(event);
+    console.log(event);
     const { name, value } = event.target;
     this.setState({ [name]: value });
   };
@@ -108,7 +117,7 @@ class Popup extends React.Component {
               </text>
             </button>
             <div className="notes">
-              <NoteKnob name="note" value={note} onChange={this.handleChange} />
+              <NoteKnob name="note" value={note} onChange={this.receiveNote} />
             </div>
           </div>
           <button className="close_btn" onClick={this.props.closePopup}>
