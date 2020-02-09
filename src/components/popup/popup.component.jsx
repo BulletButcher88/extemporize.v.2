@@ -62,14 +62,14 @@ class Popup extends React.Component {
           {/* <h5>{JSON.stringify(this.props.session)}</h5> */}
           <div className="container">
             <div className="stop">
-              <a className="stop-btn" onClick={this.props.closePopup}></a>
+              <div className="stop-btn" onClick={this.props.closePopup}></div>
             </div>
             <div className="submit">
-              <a
+              <div
                 className="submit-btn"
                 onClick={this.postRequest}
                 // onClick={this.props.onSubmit}
-              ></a>
+              ></div>
             </div>
             <div className="volume">
               <input
