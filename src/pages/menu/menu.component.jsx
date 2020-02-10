@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import firestore, { auth } from "../../firebase/firebase";
+import { auth, firestore } from "../../firebase/firebase";
 import "../menu/menu.style.scss";
 import { usePosition } from "../../components/geolocation/position";
 
@@ -16,9 +16,16 @@ function Spin() {
   );
 }
 
-function CreateSession({ currentUser }) {
-  firestore.collection("users").onSnapshot(snapshot => {
-    console.log(snapshot.val());
+function CreateSession({}) {
+  // const [session, setSession] = useState([]);
+  useEffect(() => {
+    firestore.collection("users").onSnapshot(snapshot => {
+      const newSession = snapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+      }));
+      console.log(snapshot.val());
+    });
     // const newSession = snapshot.docs.map(doc => ({
     //   id: doc.id,
     //   ...doc.data()
