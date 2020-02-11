@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { auth, firestore } from "../../firebase/firebase";
+import firebase, { auth } from "../../firebase/firebase";
 import "../menu/menu.style.scss";
 import { usePosition } from "../../components/geolocation/position";
 
@@ -16,23 +16,23 @@ function Spin() {
   );
 }
 
-function CreateSession({}) {
+function CreateSession() {
+  console.log("having issues with hooks and firestore");
   // const [session, setSession] = useState([]);
-  useEffect(() => {
-    firestore.collection("users").onSnapshot(snapshot => {
-      const newSession = snapshot.docs.map(doc => ({
-        id: doc.id,
-        ...doc.data()
-      }));
-      console.log(snapshot.val());
-    });
-    // const newSession = snapshot.docs.map(doc => ({
-    //   id: doc.id,
-    //   ...doc.data()
-    // }));
-
-    // console.log(newSession);
-  });
+  // useEffect(() => {
+  //   const unsubscribe = firebase
+  //     .firestore()
+  //     .collection("users")
+  //     .onSnapshot(snapshot => {
+  //       const newSession = snapshot.docs.map(doc => ({
+  //         id: doc.id,
+  //         ...doc.data()
+  //       }));
+  //       setSession(newSession);
+  //     });
+  //   return () => unsubscribe();
+  // }, []);
+  // return session;
 }
 
 // function OpenSession() {
@@ -73,8 +73,23 @@ export default function MenuPage({ currentUser }) {
   if (!position.latitude) {
     return (
       <>
-        <div className="spin-container">
-          <Spin />
+        <div className="menu-container">
+          <div className="spin-container">
+            <Spin />
+          </div>
+          <Col>
+            <Link
+              to={`/session/${currentUser.uid}`}
+              currentUser={currentUser}
+              onClick={() => CreateSession()}
+            >
+              CREATE A NEW SESSION{" "}
+            </Link>
+          </Col>
+          <h1>OR</h1>
+          <div className="option" onClick={() => auth.signOut()}>
+            SIGN OUT
+          </div>
         </div>
       </>
     );
