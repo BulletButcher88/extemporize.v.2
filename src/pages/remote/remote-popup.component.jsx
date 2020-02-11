@@ -13,6 +13,7 @@ class RemotePopUp extends Component {
       },
       showPopup: false,
       session: {
+        stop: false,
         note: "A",
         volume: 5,
         bridge: 0,

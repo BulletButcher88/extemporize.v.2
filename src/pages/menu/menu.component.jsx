@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
@@ -15,43 +15,6 @@ function Spin() {
     </div>
   );
 }
-
-function CreateSession() {
-  console.log("having issues with hooks and firestore");
-  const [session, setSession] = useState([]);
-  useEffect(() => {
-    const unsubscribe = firebase
-      .firestore()
-      .collection("users")
-      .onSnapshot(snapshot => {
-        const newSession = snapshot.docs.map(doc => ({
-          id: doc.id,
-          ...doc.data()
-        }));
-        setSession(newSession);
-      });
-    return () => unsubscribe();
-  }, []);
-  return session;
-}
-
-// function OpenSession() {
-//   const [session, setSession] = useState([]);
-
-//   useEffect(() => {
-//     firestore.collection("users").onSnapshot(snapshot => {
-//       const newSession = snapshot.docs.map(doc => ({
-//         id: doc.id,
-//         ...doc.data()
-//       }));
-
-//       console.log(newSession);
-//       setSession(newSession);
-//     });
-//   });
-
-//   return session;
-// }
 
 export default function MenuPage({ currentUser }) {
   const { latitude, longitude, timestamp } = usePosition();
@@ -77,15 +40,6 @@ export default function MenuPage({ currentUser }) {
           <div className="spin-container">
             <Spin />
           </div>
-          <Col>
-            <Link
-              to={`/session/${currentUser.uid}`}
-              currentUser={currentUser}
-              onClick={() => CreateSession()}
-            >
-              CREATE A NEW SESSION{" "}
-            </Link>
-          </Col>
           <h1>OR</h1>
           <div className="option" onClick={() => auth.signOut()}>
             SIGN OUT
@@ -96,7 +50,6 @@ export default function MenuPage({ currentUser }) {
   }
 
   const SessionList = () => {
-    // const sessions = OpenSession();
     return (
       <Col>
         <Link to={`/session`}>
@@ -124,7 +77,7 @@ export default function MenuPage({ currentUser }) {
         <Link
           to={`/session/${currentUser.uid}`}
           currentUser={currentUser}
-          onClick={CreateSession}
+          onClick={() => CreateSession(currentUser, position)}
         >
           CREATE A NEW SESSION{" "}
         </Link>
@@ -135,4 +88,23 @@ export default function MenuPage({ currentUser }) {
       </div>
     </div>
   );
+}
+
+function CreateSession(currentUser, position) {
+  const { providerData } = currentUser;
+
+  console.log(currentUser, position);
+  firebase
+    .firestore()
+    .collection("users")
+    .doc(currentUser.uid)
+    .set({
+      id: currentUser.uid,
+      data: providerData,
+      position: position,
+      session: [{}]
+    })
+    .then(function() {
+      console.log("USER Session successfully written!");
+    }, []);
 }

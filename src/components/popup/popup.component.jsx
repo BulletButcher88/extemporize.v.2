@@ -1,7 +1,10 @@
 import React from "react";
 import NoteKnob from "../../components/note-knob/note-knob.component";
 import { timeLoader } from "../../components/geolocation/position";
+import firebase from "../../firebase/firebase";
+
 import "./popup.style.scss";
+import { findAllByDisplayValue } from "@testing-library/react";
 // import { ReactComponent as SwitchBackground } from "../../utils/note-background.svg";
 
 const tempo = [];
@@ -49,7 +52,19 @@ class Popup extends React.Component {
   };
 
   postRequest = props => {
-    console.log(this.state, props);
+    const path = (this.state, window.location.pathname.split("/").slice(-1)[0]);
+    firebase
+      .firestore()
+      .collection("users")
+      .doc(path) //this will need to accession session url number
+      .set({
+        stop: false,
+        session: this.state
+      })
+      .then(function() {
+        console.log("Session successfully saved!");
+      });
+    console.log(path);
     this.props.closePopup();
   };
 
