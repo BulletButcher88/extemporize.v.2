@@ -18,21 +18,21 @@ function Spin() {
 
 function CreateSession() {
   console.log("having issues with hooks and firestore");
-  // const [session, setSession] = useState([]);
-  // useEffect(() => {
-  //   const unsubscribe = firebase
-  //     .firestore()
-  //     .collection("users")
-  //     .onSnapshot(snapshot => {
-  //       const newSession = snapshot.docs.map(doc => ({
-  //         id: doc.id,
-  //         ...doc.data()
-  //       }));
-  //       setSession(newSession);
-  //     });
-  //   return () => unsubscribe();
-  // }, []);
-  // return session;
+  const [session, setSession] = useState([]);
+  useEffect(() => {
+    const unsubscribe = firebase
+      .firestore()
+      .collection("users")
+      .onSnapshot(snapshot => {
+        const newSession = snapshot.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data()
+        }));
+        setSession(newSession);
+      });
+    return () => unsubscribe();
+  }, []);
+  return session;
 }
 
 // function OpenSession() {
