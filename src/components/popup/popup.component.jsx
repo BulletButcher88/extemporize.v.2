@@ -4,8 +4,6 @@ import { timeLoader } from "../../components/geolocation/position";
 import firebase from "../../firebase/firebase";
 
 import "./popup.style.scss";
-import { findAllByDisplayValue } from "@testing-library/react";
-// import { ReactComponent as SwitchBackground } from "../../utils/note-background.svg";
 
 const tempo = [];
 const key = ["A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"];
@@ -16,11 +14,12 @@ class Popup extends React.Component {
     this.state = {
       stop: false,
       volume: 5,
-      bridge: "",
-      style: "...",
-      description: "...",
+      bridge: 0,
+      style: "",
+      description: "",
       note: "",
-      tempo: null
+      tempo: null,
+      timestamp: Math.round(new Date().getTime() / 100)
     };
     this.receiveTempo = this.receiveTempo.bind(this);
   }
@@ -46,7 +45,6 @@ class Popup extends React.Component {
   };
 
   handleChange = event => {
-    console.log(event);
     const { name, value } = event.target;
     this.setState({ [name]: value });
   };
@@ -71,7 +69,6 @@ class Popup extends React.Component {
 
   render() {
     const { volume, bridge, style, description, note, tempo } = this.state;
-    console.log(this.state);
     return (
       <div className="popup">
         <div className="popup\_inner">
