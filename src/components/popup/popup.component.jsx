@@ -14,7 +14,7 @@ class Popup extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      stop: Boolean,
+      stop: false,
       volume: 5,
       bridge: "",
       style: "...",
@@ -52,19 +52,20 @@ class Popup extends React.Component {
   };
 
   postRequest = props => {
-    const path = (this.state, window.location.pathname.split("/").slice(-1)[0]);
+    const path = window.location.pathname.split("/").slice(-1)[0];
     firebase
       .firestore()
       .collection("users")
-      .doc(path) //this will need to accession session url number
-      .set({
-        stop: false,
+      .doc(path)
+      .update({
         session: this.state
       })
       .then(function() {
-        console.log("Session successfully saved!");
+        console.log("SESSION POST successfully saved!");
+      })
+      .catch(function(error) {
+        console.error("Error writing document: ", error);
       });
-    console.log(path);
     this.props.closePopup();
   };
 

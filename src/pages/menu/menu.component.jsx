@@ -102,7 +102,7 @@ function CreateSession(currentUser, position) {
       id: currentUser.uid,
       data: providerData,
       position: position,
-      session: [{}]
+      session: {}
     })
     .then(function() {
       console.log("USER Session successfully written!");
