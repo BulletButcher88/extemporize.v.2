@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
-
 import RemotePopUp from "../remote/remote-popup.component";
+import firebase from "../../firebase/firebase";
 
 import "../session/session.style.scss";
-import firebase from "../../firebase/firebase";
 
 const SessionPage = ({ currentUser }) => (
   <div className="session-container">
@@ -32,20 +31,32 @@ const SessionDisplay = ({ currentUser }) => {
   }, [currentUser]);
 
   return (
-    <>
-      {!session ? (
+    <div className="session-container">
+      {!session.volume ? (
         <div>Loading...</div>
       ) : (
         <div>
-          <div>tempo: {session.tempo}</div>
-          <div>volume: {session.volume}</div>
-          <div>bridge :{session.bridge}</div>
-          <div>style: {session.style}</div>
-          <div>description: {session.description}</div>
-          <div>note: {session.note}</div>
+          <div>
+            tempo: <h1>{session.tempo}</h1>
+          </div>
+          <div>
+            note: <h1>{session.note}</h1>
+          </div>
+          <div>
+            volume: <h3>{parseInt(session.volume) - 5}</h3>
+          </div>
+          <div>
+            bridge :<h3>{session.bridge}</h3>
+          </div>
+          <div>
+            style: <h3>{session.style}</h3>
+          </div>
+          <div>
+            description: <h3>{session.description}</h3>
+          </div>
         </div>
       )}
-    </>
+    </div>
   );
 };
 
