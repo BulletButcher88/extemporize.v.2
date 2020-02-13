@@ -1,29 +1,52 @@
-import React, { useStateå } from "react";
+import React, { useState, useEffect } from "react";
 
 import RemotePopUp from "../remote/remote-popup.component";
 
 import "../session/session.style.scss";
 import firebase from "../../firebase/firebase";
-const { session, setSession } = useStateå();
 
 const SessionPage = ({ currentUser }) => (
   <div className="session-container">
     <RemotePopUp currentUser={currentUser} />
-    {/* <SessionDisplay /> */}
+    <SessionDisplay currentUser={currentUser} />
   </div>
 );
 
-const SessionDisplay = () => {
+const SessionDisplay = ({ currentUser }) => {
+  const [session, setSession] = useState({});
   const path = window.location.pathname.split("/").slice(-1)[0];
-  firebase
-    .firestore()
-    .collection("users")
-    .doc(path)
-    .onSnapshot(function(doc) {
-      setSession(doc.data());
-      console.log("Current data: ", data.session);
-    });
+
+  useEffect(() => {
+    const unsubscribe = firebase
+      .firestore()
+      .collection("users")
+      .doc(path)
+      .onSnapshot(
+        doc => {
+          setSession(doc.data().session);
+          console.log("Current data: ", doc.data().session);
+        },
+        err => console.log("Error Snapsot", err)
+      );
+    return () => unsubscribe();
+  }, [currentUser]);
+
+  return (
+    <>
+      {!session ? (
+        <div>Loading...</div>
+      ) : (
+        <div>
+          <div>tempo: {session.tempo}</div>
+          <div>volume: {session.volume}</div>
+          <div>bridge :{session.bridge}</div>
+          <div>style: {session.style}</div>
+          <div>description: {session.description}</div>
+          <div>note: {session.note}</div>
+        </div>
+      )}
+    </>
+  );
 };
-SessionDisplay();
 
 export default SessionPage;

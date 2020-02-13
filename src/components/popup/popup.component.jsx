@@ -59,7 +59,7 @@ class Popup extends React.Component {
         session: this.state
       })
       .then(function() {
-        console.log("SESSION POST successfully saved!");
+        // console.log("SESSION POST successfully saved!");
       })
       .catch(function(error) {
         console.error("Error writing document: ", error);
