@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useSpring, animated } from "react-spring";
 import RemotePopUp from "../remote/remote-popup.component";
 import firebase from "../../firebase/firebase";
 
@@ -37,11 +38,8 @@ const SessionDisplay = ({ currentUser }) => {
       ) : (
         <div>
           <div>
-            tempo:{" "}
-            <h1>
-              <Tempo tempo={session.tempo} />
-              {session.tempo}
-            </h1>
+            tempo:
+            <Tempo tempo={session.tempo} />
           </div>
           <div>
             note: <h1 className="note">{session.note}</h1>
@@ -64,6 +62,30 @@ const SessionDisplay = ({ currentUser }) => {
   );
 };
 
-const Tempo = ({ temp }) => {};
+const Tempo = ({ tempo }) => {
+  const [state, toggle] = useState(true);
+  const { x } = useSpring({
+    from: { x: 0 },
+    x: state ? 1 : 0,
+    config: { duration: tempo }
+  });
+  return (
+    <div onClick={() => toggle(!state)}>
+      <animated.div
+        style={{
+          opacity: x.interpolate({ range: [0, 1], output: [0, 1] }),
+          transform: x
+            .interpolate({
+              range: [0, 1],
+              output: [1, 0.7, 0.9, 1.1, 0.9, 1.1, 1.03, 1]
+            })
+            .interpolate(x => `scale(${x})`)
+        }}
+      >
+        0
+      </animated.div>
+    </div>
+  );
+};
 
 export default SessionPage;
