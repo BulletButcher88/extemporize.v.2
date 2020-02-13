@@ -31,16 +31,20 @@ const SessionDisplay = ({ currentUser }) => {
   }, [currentUser]);
 
   return (
-    <div className="session-container">
+    <div className="session-panel">
       {!session.volume ? (
-        <div>Loading...</div>
+        <div>Open remote to instruct...</div>
       ) : (
         <div>
           <div>
-            tempo: <h1>{session.tempo}</h1>
+            tempo:{" "}
+            <h1>
+              <Tempo tempo={session.tempo} />
+              {session.tempo}
+            </h1>
           </div>
           <div>
-            note: <h1>{session.note}</h1>
+            note: <h1 className="note">{session.note}</h1>
           </div>
           <div>
             volume: <h3>{parseInt(session.volume) - 5}</h3>
@@ -59,5 +63,7 @@ const SessionDisplay = ({ currentUser }) => {
     </div>
   );
 };
+
+const Tempo = ({ temp }) => {};
 
 export default SessionPage;

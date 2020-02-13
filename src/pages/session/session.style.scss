@@ -1,2 +1,8 @@
-.session-container {
+.session-panel {
+  display: flex;
+  justify-content: center;
+}
+
+.note {
+  font-size: 6rem;
 }
