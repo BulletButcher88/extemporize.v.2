@@ -76,13 +76,13 @@ const Tempo = ({ tempo }) => {
           opacity: x.interpolate({ range: [0, 1], output: [0, 1] }),
           transform: x
             .interpolate({
-              range: [0, 1],
+              range: [0, 1, 0.01],
               output: [1, 0.7, 0.9, 1.1, 0.9, 1.1, 1.03, 1]
             })
             .interpolate(x => `scale(${x})`)
         }}
       >
-        0
+        ---0---
       </animated.div>
     </div>
   );
