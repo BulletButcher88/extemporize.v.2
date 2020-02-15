@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { useSpring, animated } from "react-spring";
+import { useSpring } from "react-spring";
+import { Keyframes, animated, config } from "react-spring/renderprops";
 import RemotePopUp from "../remote/remote-popup.component";
 import firebase from "../../firebase/firebase";
 
@@ -39,7 +40,10 @@ const SessionDisplay = ({ currentUser }) => {
         <div>
           <div>
             tempo:
-            <Tempo tempo={session.tempo} />
+            <Tempo
+              tempo={session.tempo}
+              style={{ width: 1200, height: 1200 }}
+            />
           </div>
           <div>
             note: <h1 className="note">{session.note}</h1>
@@ -62,29 +66,33 @@ const SessionDisplay = ({ currentUser }) => {
   );
 };
 
+const Content = Keyframes.Spring(async next => {
+  // None of this will cause React to render, the component renders only once :-)
+  while (true) {
+    await next({
+      opacity: 1,
+      width: 80,
+      height: 80,
+      background: "blue"
+    });
+    await next({
+      opacity: 0,
+      width: 40,
+      height: 40,
+      background: "black"
+    });
+  }
+});
+
 const Tempo = ({ tempo }) => {
-  const [state, toggle] = useState(true);
-  const { x } = useSpring({
-    from: { x: 0 },
-    x: state ? 1 : 0,
-    config: { duration: tempo }
-  });
   return (
-    <div onClick={() => toggle(!state)}>
-      <animated.div
-        style={{
-          opacity: x.interpolate({ range: [0, 1], output: [0, 1] }),
-          transform: x
-            .interpolate({
-              range: [0, 1, 0.01],
-              output: [1, 0.7, 0.9, 1.1, 0.9, 1.1, 1.03, 1]
-            })
-            .interpolate(x => `scale(${x})`)
-        }}
-      >
-        ---0---
-      </animated.div>
-    </div>
+    <Content>
+      {props => (
+        <animated.div
+          style={{ position: "relative", borderRadius: "50%", ...props }}
+        />
+      )}
+    </Content>
   );
 };
 
