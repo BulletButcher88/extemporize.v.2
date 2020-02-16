@@ -22,6 +22,7 @@ class RemotePopUp extends Component {
         stop: false
       }
     };
+    console.log("props in remote", props);
   }
 
   togglePopup() {

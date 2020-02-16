@@ -35,30 +35,35 @@ const SessionDisplay = ({ currentUser }) => {
   return (
     <div className="session-panel">
       {!session.volume ? (
-        <div>Open remote to instruct...</div>
+        <div>Open remote to conduct...</div>
       ) : (
         <div>
-          <div>
-            tempo:
+          <div className="text-group"> tempo:</div>
+          <div className="tempo-session">
             <Tempo
               tempo={session.tempo}
-              style={{ width: 1200, height: 1200 }}
+              style={{ width: 2000, height: 2000 }}
             />
           </div>
+          <div className="text-group"> note: </div>
           <div>
-            note: <h1 className="note">{session.note}</h1>
+            <h1 className="note">{session.note}</h1>
           </div>
+          <div className="text-group"> volume: </div>
           <div>
-            volume: <h3>{parseInt(session.volume) - 5}</h3>
+            <h3>{parseInt(session.volume) - 5}</h3>
           </div>
+          <div className="text-group"> bridge : </div>
           <div>
-            bridge :<h3>{session.bridge}</h3>
+            <h3>{session.bridge}</h3>
           </div>
+          <div className="text-group"> style: </div>
           <div>
-            style: <h3>{session.style}</h3>
+            <h3>{session.style}</h3>
           </div>
+          <div className="text-group"> description: </div>
           <div>
-            description: <h3>{session.description}</h3>
+            <h3>{session.description}</h3>
           </div>
         </div>
       )}
@@ -70,29 +75,98 @@ const Content = Keyframes.Spring(async next => {
   // None of this will cause React to render, the component renders only once :-)
   while (true) {
     await next({
-      opacity: 1,
+      from: { opacity: 0 },
+      opacity: 0,
       width: 80,
       height: 80,
       background: "blue"
     });
     await next({
-      opacity: 0,
-      width: 40,
-      height: 40,
-      background: "black"
+      from: { opacity: 1 },
+      opacity: 0.5,
+      width: 10,
+      height: 10,
+      background: "blue"
+    });
+  }
+});
+
+const barCenterPosition = "35vw";
+const barEdgePosition = "5vw";
+
+const BarContent = Keyframes.Spring(async next => {
+  while (true) {
+    await next({
+      from: { left: barCenterPosition, opacity: 1 },
+      position: "absolute",
+      opacity: 0.7,
+      left: barEdgePosition,
+      width: 60,
+      height: 20,
+      background: "tomato"
+    });
+
+    await next({
+      from: { left: barEdgePosition },
+      left: barCenterPosition,
+      opacity: 1
+    });
+  }
+});
+
+const BarContent2 = Keyframes.Spring(async next => {
+  // None of this will cause React to render, the component renders only once :-)
+  while (true) {
+    await next({
+      from: { right: barCenterPosition, opacity: 1 },
+      position: "absolute",
+      opacity: 0.7,
+      right: barEdgePosition,
+      width: 60,
+      height: 20,
+      background: "tomato"
+    });
+
+    await next({
+      from: { right: barEdgePosition },
+      right: barCenterPosition,
+      opacity: 1
     });
   }
 });
 
 const Tempo = ({ tempo }) => {
+  const temp = tempo / 2;
   return (
-    <Content>
-      {props => (
-        <animated.div
-          style={{ position: "relative", borderRadius: "50%", ...props }}
-        />
+    <>
+      {!temp ? (
+        <>LOADING TEMPO</>
+      ) : (
+        <>
+          <Content config={{ duration: temp }}>
+            {props => (
+              <animated.div
+                style={{ position: "relative", borderRadius: "50%", ...props }}
+              />
+            )}
+          </Content>
+          <BarContent native config={{ duration: temp }}>
+            {props => (
+              <animated.div
+                style={{ position: "relative", borderRadius: "30%", ...props }}
+              />
+            )}
+          </BarContent>
+          <BarContent2 native config={{ duration: temp }}>
+            {props => (
+              <animated.div
+                style={{ position: "relative", borderRadius: "30%", ...props }}
+              />
+            )}
+          </BarContent2>
+        </>
       )}
-    </Content>
+    </>
   );
 };
 

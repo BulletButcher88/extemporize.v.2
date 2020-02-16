@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
 export const timeLoader = () => {
-  return Math.round(new Date().getTime() / 10);
+  return Math.round(new Date().getTime());
 };
 
 export const usePosition = () => {
