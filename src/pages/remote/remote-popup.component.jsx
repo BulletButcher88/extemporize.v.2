@@ -39,11 +39,14 @@ class RemotePopUp extends Component {
           <button onClick={this.togglePopup.bind(this)}> Launch Remote</button>
         ) : null}
         {this.state.showPopup ? (
-          <Popup
-            session={this.state.session}
-            closePopup={this.togglePopup.bind(this)}
-            onSubmit={this.onSubmit}
-          />
+          <>
+            <div className="popup-background" />>
+            <Popup
+              session={this.state.session}
+              closePopup={this.togglePopup.bind(this)}
+              onSubmit={this.onSubmit}
+            />
+          </>
         ) : (
           <BackButton />
         )}
