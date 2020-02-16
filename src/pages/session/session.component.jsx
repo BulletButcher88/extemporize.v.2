@@ -76,16 +76,15 @@ const Content = Keyframes.Spring(async next => {
   while (true) {
     await next({
       from: { opacity: 0 },
-      opacity: 0,
+      opacity: 0.5,
       width: 80,
       height: 80,
       background: "blue"
     });
     await next({
-      from: { opacity: 1 },
-      opacity: 0.5,
-      width: 10,
-      height: 10,
+      opacity: 1,
+      width: 0,
+      height: 0,
       background: "blue"
     });
   }
@@ -152,18 +151,25 @@ const Tempo = ({ tempo }) => {
           </Content>
           <BarContent native config={{ duration: temp }}>
             {props => (
-              <animated.div
-                style={{ position: "relative", borderRadius: "30%", ...props }}
-              />
+              <animated.div style={{ position: "relative", ...props }} />
             )}
           </BarContent>
-          <BarContent2 native config={{ duration: temp }}>
+          <div
+            style={{
+              position: "absolute",
+              right: "43.3%",
+              width: 20,
+              height: 80,
+              background: "tomato"
+            }}
+          />
+          {/* <BarContent2 native config={{ duration: temp }}>
             {props => (
               <animated.div
-                style={{ position: "relative", borderRadius: "30%", ...props }}
+                style={{ position: "relative", ...props }}
               />
             )}
-          </BarContent2>
+          </BarContent2> */}
         </>
       )}
     </>
