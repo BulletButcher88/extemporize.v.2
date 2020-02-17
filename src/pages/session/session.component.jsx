@@ -32,6 +32,8 @@ const SessionDisplay = ({ currentUser }) => {
     return () => unsubscribe();
   }, [currentUser]);
 
+  console.log("SessionDisplay", session);
+
   return (
     <div className="session-panel">
       {!session.volume ? (
@@ -75,16 +77,15 @@ const Content = Keyframes.Spring(async next => {
   // None of this will cause React to render, the component renders only once :-)
   while (true) {
     await next({
-      from: { opacity: 0 },
-      opacity: 0.5,
-      width: 80,
-      height: 80,
-      background: "blue"
-    });
-    await next({
       opacity: 1,
       width: 0,
       height: 0,
+      background: "blue"
+    });
+    await next({
+      opacity: 0,
+      width: 80,
+      height: 80,
       background: "blue"
     });
   }
@@ -98,7 +99,7 @@ const BarContent = Keyframes.Spring(async next => {
     await next({
       from: { left: barCenterPosition, opacity: 1 },
       position: "absolute",
-      opacity: 0.7,
+      opacity: 1,
       left: barEdgePosition,
       width: 60,
       height: 20,
@@ -108,27 +109,6 @@ const BarContent = Keyframes.Spring(async next => {
     await next({
       from: { left: barEdgePosition },
       left: barCenterPosition,
-      opacity: 1
-    });
-  }
-});
-
-const BarContent2 = Keyframes.Spring(async next => {
-  // None of this will cause React to render, the component renders only once :-)
-  while (true) {
-    await next({
-      from: { right: barCenterPosition, opacity: 1 },
-      position: "absolute",
-      opacity: 0.7,
-      right: barEdgePosition,
-      width: 60,
-      height: 20,
-      background: "tomato"
-    });
-
-    await next({
-      from: { right: barEdgePosition },
-      right: barCenterPosition,
       opacity: 1
     });
   }
@@ -163,13 +143,6 @@ const Tempo = ({ tempo }) => {
               background: "tomato"
             }}
           />
-          {/* <BarContent2 native config={{ duration: temp }}>
-            {props => (
-              <animated.div
-                style={{ position: "relative", ...props }}
-              />
-            )}
-          </BarContent2> */}
         </>
       )}
     </>

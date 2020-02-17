@@ -10,6 +10,7 @@ const key = ["A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"];
 
 class Popup extends React.Component {
   constructor(props) {
+    console.log("this props popup component", props);
     super(props);
     this.state = {
       stop: false,
