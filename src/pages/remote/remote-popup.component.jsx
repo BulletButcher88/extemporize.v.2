@@ -6,23 +6,9 @@ class RemotePopUp extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      location: {
-        latitude: null,
-        longitude: null,
-        error: null
-      },
-      showPopup: false,
-      session: {
-        note: "A",
-        volume: 5,
-        bridge: 0,
-        tempo: [],
-        style: "",
-        description: "",
-        stop: false
-      }
+      showPopup: false
     };
-    console.log("props in remote", props);
+    console.log(props);
   }
 
   togglePopup() {
@@ -42,7 +28,7 @@ class RemotePopUp extends Component {
           <>
             <div className="popup-background" />>
             <Popup
-              session={this.state.session}
+              session={this.props.session}
               closePopup={this.togglePopup.bind(this)}
               onSubmit={this.onSubmit}
             />

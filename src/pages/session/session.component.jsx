@@ -6,14 +6,7 @@ import firebase from "../../firebase/firebase";
 
 import "../session/session.style.scss";
 
-const SessionPage = ({ currentUser }) => (
-  <div className="session-container">
-    <RemotePopUp currentUser={currentUser} />
-    <SessionDisplay currentUser={currentUser} />
-  </div>
-);
-
-const SessionDisplay = ({ currentUser }) => {
+const SessionPage = ({ currentUser }) => {
   const [session, setSession] = useState({});
   const path = window.location.pathname.split("/").slice(-1)[0];
 
@@ -32,6 +25,17 @@ const SessionDisplay = ({ currentUser }) => {
     return () => unsubscribe();
   }, [currentUser]);
 
+  console.log("SESSION PROPS", session);
+
+  return (
+    <div className="session-container">
+      <RemotePopUp currentUser={currentUser} session={session} />
+      <SessionDisplay currentUser={currentUser} session={session} />
+    </div>
+  );
+};
+
+const SessionDisplay = ({ session }) => {
   console.log("SessionDisplay", session);
 
   return (
@@ -91,8 +95,8 @@ const Content = Keyframes.Spring(async next => {
   }
 });
 
-const barCenterPosition = "35vw";
-const barEdgePosition = "5vw";
+const barCenterPosition = `${32}vw`;
+const barEdgePosition = "5%";
 
 const BarContent = Keyframes.Spring(async next => {
   while (true) {
@@ -101,7 +105,7 @@ const BarContent = Keyframes.Spring(async next => {
       position: "absolute",
       opacity: 1,
       left: barEdgePosition,
-      width: 60,
+      width: "22vw",
       height: 20,
       background: "tomato"
     });
@@ -125,7 +129,11 @@ const Tempo = ({ tempo }) => {
           <Content config={{ duration: temp }}>
             {props => (
               <animated.div
-                style={{ position: "relative", borderRadius: "50%", ...props }}
+                style={{
+                  position: "relative",
+                  borderRadius: "50%",
+                  ...props
+                }}
               />
             )}
           </Content>
@@ -137,7 +145,7 @@ const Tempo = ({ tempo }) => {
           <div
             style={{
               position: "absolute",
-              right: "43.3%",
+              right: "48%",
               width: 20,
               height: 80,
               background: "tomato"

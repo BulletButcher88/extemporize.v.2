@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
@@ -50,6 +50,26 @@ export default function MenuPage({ currentUser }) {
   }
 
   const SessionList = () => {
+    const [session, setSession] = useState({});
+
+    useEffect(() => {
+      const unsubscribe = firebase
+        .firestore()
+        .collection("users")
+        .onSnapshot(
+          doc => {
+            const openSessions = doc.docs.map(doc => ({
+              id: doc.id,
+              ...doc.data()
+            }));
+            console.log("Current data: ", openSessions);
+            setSession(openSessions);
+          },
+          err => console.log("Error Snapsot", err)
+        );
+      return () => unsubscribe();
+    }, [currentUser]);
+
     return (
       <Col>
         <Link to={`/session`}>
@@ -57,13 +77,13 @@ export default function MenuPage({ currentUser }) {
             <div key={session.id}>{session.id}</div>;
           })} */}
           {/* <code>{JSON.stringify(sessions)}</code> */}
-          <code>{JSON.stringify(position)}</code>
-          <img
+          {/* <code>{JSON.stringify(session)}</code> */}
+          {/* <img
             src={currentUser.photoURL}
             alt={currentUser.displayName}
             className="rounded mx-auto d-block"
           />
-          Join {currentUser.displayName} session
+          Join {currentUser.displayName} session */}
         </Link>
       </Col>
     );
