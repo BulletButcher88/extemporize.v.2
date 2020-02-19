@@ -51,7 +51,6 @@ export default function MenuPage({ currentUser }) {
 
   const SessionList = () => {
     const [session, setSession] = useState({});
-
     useEffect(() => {
       const unsubscribe = firebase
         .firestore()
@@ -62,30 +61,33 @@ export default function MenuPage({ currentUser }) {
               id: doc.id,
               ...doc.data()
             }));
-            console.log("Current data: ", openSessions);
             setSession(openSessions);
           },
           err => console.log("Error Snapsot", err)
         );
       return () => unsubscribe();
-    }, [currentUser]);
+    });
+
+    console.log("Current data: ", session);
 
     return (
-      <Col>
-        <Link to={`/session`}>
-          {/* {sessions.map(session => {
-            <div key={session.id}>{session.id}</div>;
-          })} */}
-          {/* <code>{JSON.stringify(sessions)}</code> */}
-          {/* <code>{JSON.stringify(session)}</code> */}
-          {/* <img
+      <>
+        <Col>
+          <Link to={`/session`}>
+            {/* {session.map(user => {
+                <div key={user.id}>{user.id}</div>;
+              })} */}
+            <code>{JSON.stringify(session)}</code>;
+            {/* <code>{JSON.stringify(session)}</code> */}
+            {/* <img
             src={currentUser.photoURL}
             alt={currentUser.displayName}
             className="rounded mx-auto d-block"
           />
           Join {currentUser.displayName} session */}
-        </Link>
-      </Col>
+          </Link>
+        </Col>
+      </>
     );
   };
 
