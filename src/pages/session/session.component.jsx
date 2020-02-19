@@ -9,6 +9,15 @@ import "../session/session.style.scss";
 const SessionPage = ({ currentUser }) => {
   const [session, setSession] = useState({});
   const path = window.location.pathname.split("/").slice(-1)[0];
+  const userId = firebase.auth().currentUser.uid;
+  // firebase
+  //   .database()
+  //   .ref("/users/" + userId)
+  //   .once()
+  //   .then(function(snapshot) {
+  //     var username = snapshot.val();
+  //     console.log(username);
+  //   });
 
   useEffect(() => {
     const unsubscribe = firebase

@@ -71,12 +71,7 @@ export default function MenuPage({ currentUser }) {
   };
 
   const SessionList = () => {
-    let session = undefined;
-    if (!session) {
-      session = FetchSessions();
-    } else {
-      return session;
-    }
+    const session = FetchSessions();
 
     return (
       <>
@@ -85,7 +80,7 @@ export default function MenuPage({ currentUser }) {
             {/* {session.map(user => {
                 <div key={user.id}>{user.id}</div>;
               })} */}
-            <code>{JSON.stringify(session)}</code>;
+            <code>{JSON.stringify(session)}</code>
             {/* <code>{JSON.stringify(session)}</code> */}
             {/* <img
             src={currentUser.photoURL}
@@ -122,18 +117,19 @@ export default function MenuPage({ currentUser }) {
 
 function CreateSession(currentUser, position) {
   const { providerData } = currentUser;
-
-  console.log(currentUser, position);
-  firebase
-    .firestore()
-    .collection("users")
-    .doc(currentUser.uid)
-    .update({
-      id: currentUser.uid,
-      data: providerData,
-      position: position
-    })
-    .then(function() {
-      console.log("USER Session successfully written!");
-    }, []);
+  const userId = firebase.auth().currentUser;
+  console.log("--LINKING USERS", userId.id);
+  console.log("---- current user id :", currentUser.uid);
+  // firebase
+  //   .firestore()
+  //   .collection("users")
+  //   .doc(currentUser.uid)
+  //   .update({
+  //     id: currentUser.uid,
+  //     data: providerData,
+  //     position: position
+  //   })
+  //   .then(function() {
+  //     console.log("USER Session successfully written!");
+  //   }, []);
 }
