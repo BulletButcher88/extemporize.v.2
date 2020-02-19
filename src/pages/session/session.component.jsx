@@ -81,15 +81,15 @@ const Content = Keyframes.Spring(async next => {
   // None of this will cause React to render, the component renders only once :-)
   while (true) {
     await next({
-      opacity: 1,
-      width: 0,
-      height: 0,
-      background: "blue"
-    });
-    await next({
       opacity: 0,
       width: 80,
       height: 80,
+      background: "blue"
+    });
+    await next({
+      opacity: 1,
+      width: 0,
+      height: 0,
       background: "blue"
     });
   }

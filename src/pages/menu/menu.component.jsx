@@ -49,7 +49,7 @@ export default function MenuPage({ currentUser }) {
     );
   }
 
-  const SessionList = () => {
+  const FetchSessions = () => {
     const [session, setSession] = useState({});
     useEffect(() => {
       const unsubscribe = firebase
@@ -66,9 +66,17 @@ export default function MenuPage({ currentUser }) {
           err => console.log("Error Snapsot", err)
         );
       return () => unsubscribe();
-    });
+    }, [currentUser]);
+    return session;
+  };
 
-    console.log("Current data: ", session);
+  const SessionList = () => {
+    let session = undefined;
+    if (!session) {
+      session = FetchSessions();
+    } else {
+      return session;
+    }
 
     return (
       <>
@@ -120,11 +128,10 @@ function CreateSession(currentUser, position) {
     .firestore()
     .collection("users")
     .doc(currentUser.uid)
-    .set({
+    .update({
       id: currentUser.uid,
       data: providerData,
-      position: position,
-      session: {}
+      position: position
     })
     .then(function() {
       console.log("USER Session successfully written!");

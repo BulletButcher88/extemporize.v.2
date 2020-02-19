@@ -6,7 +6,8 @@ class RemotePopUp extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      showPopup: false
+      showPopup: false,
+      session: props.session
     };
     console.log(props);
   }
