@@ -2,4 +2,5 @@ Extemporize is an app that helps communicates to members in a band what to play.
 
 In the project directory, you can run:
 
-### `npm start`
+### `npm install
+npm start`
