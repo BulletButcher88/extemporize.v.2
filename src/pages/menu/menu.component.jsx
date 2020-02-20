@@ -50,7 +50,7 @@ export default function MenuPage({ currentUser }) {
   }
 
   const FetchSessions = () => {
-    const [session, setSession] = useState({});
+    const [session, setSession] = useState([]);
     useEffect(() => {
       const unsubscribe = firebase
         .firestore()
@@ -63,7 +63,7 @@ export default function MenuPage({ currentUser }) {
             }));
             setSession(openSessions);
           },
-          err => console.log("Error Snapsot", err)
+          err => console.log("Error with Snapshot", err)
         );
       return () => unsubscribe();
     }, [currentUser]);
@@ -71,17 +71,18 @@ export default function MenuPage({ currentUser }) {
   };
 
   const SessionList = () => {
-    const session = FetchSessions();
+    const openSessions = FetchSessions();
 
     return (
       <>
         <Col>
           <Link to={`/session`}>
-            {/* {session.map(user => {
-                <div key={user.id}>{user.id}</div>;
-              })} */}
-            <code>{JSON.stringify(session)}</code>
-            {/* <code>{JSON.stringify(session)}</code> */}
+            {/* {openSessions.map(post => (
+              <div key={post.id}>
+                <h3>{post.id}</h3>
+              </div>
+            ))} */}
+            {openSessions ? <code>{JSON.stringify(openSessions)}</code> : null}
             {/* <img
             src={currentUser.photoURL}
             alt={currentUser.displayName}
