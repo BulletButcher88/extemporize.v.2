@@ -48,6 +48,12 @@ const SessionList = () => {
               SESSION ID: {post.id}
               <div>{post.position.latitude}</div>
               <div>{post.position.longitude}</div>
+              {post.data ? (
+                <img
+                  src={post.data[0].photoURL}
+                  style={{ width: 40, height: 40, borderRadius: "50%" }}
+                />
+              ) : null}
             </div>
           </Link>
         ))}
