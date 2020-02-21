@@ -36,6 +36,26 @@ function Spin() {
   );
 }
 
+const SessionList = () => {
+  const openSessions = FetchSessions();
+
+  return (
+    <>
+      <Col>
+        {openSessions.map((post, id) => (
+          <Link key={id} to={`/session/${post.id}`}>
+            <div key={id}>
+              SESSION ID: {post.id}
+              <div>{post.position.latitude}</div>
+              <div>{post.position.longitude}</div>
+            </div>
+          </Link>
+        ))}
+      </Col>
+    </>
+  );
+};
+
 export default function MenuPage({ currentUser }) {
   const { latitude, longitude, timestamp } = usePosition();
   const [position, setPosition] = useState([
@@ -68,25 +88,6 @@ export default function MenuPage({ currentUser }) {
       </>
     );
   }
-
-  const SessionList = () => {
-    const openSessions = FetchSessions();
-
-    return (
-      <>
-        <Col>
-          <Link to={`/session`}>
-            {openSessions.map(post => (
-              <div key={post.id}>
-                <h3>{post.id}</h3>
-              </div>
-            ))}
-            {openSessions ? <code>{JSON.stringify(openSessions)}</code> : null}
-          </Link>
-        </Col>
-      </>
-    );
-  };
 
   return (
     <div className="menu-container">
