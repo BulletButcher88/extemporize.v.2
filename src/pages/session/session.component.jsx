@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useSpring } from "react-spring";
-import { Keyframes, animated, config } from "react-spring/renderprops";
+import { Keyframes, animated } from "react-spring/renderprops";
 import RemotePopUp from "../remote/remote-popup.component";
 import firebase from "../../firebase/firebase";
 
@@ -9,15 +8,6 @@ import "../session/session.style.scss";
 const SessionPage = ({ currentUser }) => {
   const [session, setSession] = useState({});
   const path = window.location.pathname.split("/").slice(-1)[0];
-  const userId = firebase.auth().currentUser.uid;
-  // firebase
-  //   .database()
-  //   .ref("/users/" + userId)
-  //   .once()
-  //   .then(function(snapshot) {
-  //     var username = snapshot.val();
-  //     console.log(username);
-  //   });
 
   useEffect(() => {
     const unsubscribe = firebase
@@ -27,14 +17,11 @@ const SessionPage = ({ currentUser }) => {
       .onSnapshot(
         doc => {
           setSession(doc.data().session);
-          console.log("Current data: ", doc.data().session);
         },
         err => console.log("Error Snapsot", err)
       );
     return () => unsubscribe();
   }, [currentUser]);
-
-  console.log("SESSION PROPS", session);
 
   return (
     <div className="session-container">
@@ -45,8 +32,6 @@ const SessionPage = ({ currentUser }) => {
 };
 
 const SessionDisplay = ({ session }) => {
-  console.log("SessionDisplay", session);
-
   return (
     <div className="session-panel">
       {!session.volume ? (

@@ -6,6 +6,26 @@ import firebase, { auth } from "../../firebase/firebase";
 import "../menu/menu.style.scss";
 import { usePosition } from "../../components/geolocation/position";
 
+const FetchSessions = () => {
+  const [session, setSession] = useState([]);
+  useEffect(() => {
+    firebase
+      .firestore()
+      .collection("users")
+      .onSnapshot(
+        doc => {
+          const openSessions = doc.docs.map(doc => ({
+            id: doc.id,
+            ...doc.data()
+          }));
+          setSession(openSessions);
+        },
+        err => console.log("Error with Snapshot", err)
+      );
+  });
+  return session;
+};
+
 function Spin() {
   return (
     <div>
@@ -49,27 +69,6 @@ export default function MenuPage({ currentUser }) {
     );
   }
 
-  const FetchSessions = () => {
-    const [session, setSession] = useState([]);
-    useEffect(() => {
-      const unsubscribe = firebase
-        .firestore()
-        .collection("users")
-        .onSnapshot(
-          doc => {
-            const openSessions = doc.docs.map(doc => ({
-              id: doc.id,
-              ...doc.data()
-            }));
-            setSession(openSessions);
-          },
-          err => console.log("Error with Snapshot", err)
-        );
-      return () => unsubscribe();
-    }, [currentUser]);
-    return session;
-  };
-
   const SessionList = () => {
     const openSessions = FetchSessions();
 
@@ -77,18 +76,12 @@ export default function MenuPage({ currentUser }) {
       <>
         <Col>
           <Link to={`/session`}>
-            {/* {openSessions.map(post => (
+            {openSessions.map(post => (
               <div key={post.id}>
                 <h3>{post.id}</h3>
               </div>
-            ))} */}
+            ))}
             {openSessions ? <code>{JSON.stringify(openSessions)}</code> : null}
-            {/* <img
-            src={currentUser.photoURL}
-            alt={currentUser.displayName}
-            className="rounded mx-auto d-block"
-          />
-          Join {currentUser.displayName} session */}
           </Link>
         </Col>
       </>
@@ -102,10 +95,10 @@ export default function MenuPage({ currentUser }) {
       <Col>
         <Link
           to={`/session/${currentUser.uid}`}
-          currentUser={currentUser}
+          // currentUser={currentUser}
           onClick={() => CreateSession(currentUser, position)}
         >
-          CREATE A NEW SESSION{" "}
+          CREATE A NEW SESSION
         </Link>
       </Col>
       <h1>OR</h1>
@@ -117,10 +110,12 @@ export default function MenuPage({ currentUser }) {
 }
 
 function CreateSession(currentUser, position) {
+  const idList = FetchSessions();
+
   const { providerData } = currentUser;
-  const userId = firebase.auth().currentUser;
-  console.log("--LINKING USERS", userId.id);
-  console.log("---- current user id :", currentUser.uid);
+
+  console.log("-----fetching session ids", idList);
+
   // firebase
   //   .firestore()
   //   .collection("users")
