@@ -38,22 +38,35 @@ function Spin() {
 
 const SessionList = () => {
   const openSessions = FetchSessions();
-
   return (
     <>
       <Col>
         {openSessions.map((post, id) => (
           <Link key={id} to={`/session/${post.id}`}>
             <div key={id}>
-              SESSION ID: {post.id}
-              <div>{post.position.latitude}</div>
-              <div>{post.position.longitude}</div>
               {post.data ? (
                 <img
                   src={post.data[0].photoURL}
-                  style={{ width: 40, height: 40, borderRadius: "50%" }}
+                  alt="https://picsum.photos/200"
+                  style={{
+                    width: 40,
+                    height: 40,
+                    borderRadius: "50%",
+                    zIndex: { id }
+                  }}
                 />
-              ) : null}
+              ) : (
+                <img
+                  src="https://picsum.photos/200"
+                  alt="https://picsum.photos/200"
+                  style={{
+                    width: 40,
+                    height: 40,
+                    borderRadius: "50%",
+                    zIndex: { id }
+                  }}
+                />
+              )}
             </div>
           </Link>
         ))}
@@ -102,7 +115,8 @@ export default function MenuPage({ currentUser }) {
       <Col>
         <Link
           to={`/session/${currentUser.uid}`}
-          // currentUser={currentUser}
+          currentUser={currentUser}
+          openSessions={() => FetchSessions()}
           onClick={() => CreateSession(currentUser, position)}
         >
           CREATE A NEW SESSION
@@ -116,13 +130,14 @@ export default function MenuPage({ currentUser }) {
   );
 }
 
-function CreateSession(currentUser, position) {
-  const idList = FetchSessions();
-
-  const { providerData } = currentUser;
-
-  console.log("-----fetching session ids", idList);
-
+function CreateSession(props) {
+  // const { providerData } = currentUser;
+  console.log("CreateSession", props);
+  // {
+  //   openSessions
+  //     ? openSessions.map()
+  //     : console.log("error loading openSessions");
+  // }
   // firebase
   //   .firestore()
   //   .collection("users")
