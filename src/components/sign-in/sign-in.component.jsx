@@ -59,8 +59,8 @@ class SignIn extends React.Component {
     return (
       <div className="sign-up">
         <form className="sign-up-form" onSubmit={this.handleSubmit}>
-          <h3 className="title">Don't have an account?</h3>
-          <span>Sign up with your email and password</span>
+          <h4 className="title">Sign In</h4>
+          {/* <span>Sign up with your email and password</span>
           <div className="input-inline">
             <FormInput
               type="text"
@@ -97,7 +97,7 @@ class SignIn extends React.Component {
           </div>
           <div className="buttons">
             <CustomButton type="submit">SIGN UP</CustomButton>
-          </div>
+          </div> */}
           <div className="google-btn">
             <CustomButton onClick={signInWithGoogle} isGoogleSignIn>
               Google
