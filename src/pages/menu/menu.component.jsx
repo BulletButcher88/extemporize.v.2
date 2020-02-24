@@ -75,28 +75,29 @@ const SessionList = () => {
   );
 };
 
-function CreateSession(currentUser) {
-  const [database, setDatabase] = useState(FetchSessions());
+function CreateSession(currentUser, position) {
+  // const [database, setDatabase] = useState(FetchSessions());
 
-  const { uid } = currentUser;
+  const { providerData } = currentUser;
   // const data = session;
-  console.log("CreateSession", database);
+  // console.log("CreateSession", database);
 
   // {
   //   data ? console.log("data", data) : console.log("error loading data");
   // }
-  // firebase
-  //   .firestore()
-  //   .collection("users")
-  //   .doc(currentUser.uid)
-  //   .update({
-  //     id: currentUser.uid,
-  //     data: providerData,
-  //     position: position
-  //   })
-  //   .then(function() {
-  //     console.log("USER Session successfully written!");
-  //   }, []);
+  firebase
+    .firestore()
+    .collection("users")
+    .doc(currentUser.uid)
+    .update({
+      id: currentUser.uid,
+      data: providerData,
+      position: position,
+      session: {}
+    })
+    .then(function() {
+      console.log("USER Session successfully written!");
+    }, []);
 }
 
 export default function MenuPage({ currentUser }) {
