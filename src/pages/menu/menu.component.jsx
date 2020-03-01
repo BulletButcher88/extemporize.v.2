@@ -75,7 +75,11 @@ const SessionList = () => {
   );
 };
 
-function CreateSession(currentUser, position) {
+const CreateSession = (currentUser, position) => {
+  const openSessions = FetchSessions();
+  {
+    openSessions.map((user, id) => console.log(user.id));
+  }
   // const [database, setDatabase] = useState(FetchSessions());
 
   const { providerData } = currentUser;
@@ -85,20 +89,20 @@ function CreateSession(currentUser, position) {
   // {
   //   data ? console.log("data", data) : console.log("error loading data");
   // }
-  firebase
-    .firestore()
-    .collection("users")
-    .doc(currentUser.uid)
-    .update({
-      id: currentUser.uid,
-      data: providerData,
-      position: position,
-      session: {}
-    })
-    .then(function() {
-      console.log("USER Session successfully written!");
-    }, []);
-}
+  // firebase
+  //   .firestore()
+  //   .collection("users")
+  //   .doc(currentUser.uid)
+  //   .update({
+  //     id: currentUser.uid,
+  //     data: providerData,
+  //     position: position,
+  //     session: {}
+  //   })
+  //   .then(function() {
+  //     console.log("USER Session successfully written!");
+  //   }, []);
+};
 
 export default function MenuPage({ currentUser }) {
   const { latitude, longitude, timestamp } = usePosition();
@@ -140,8 +144,6 @@ export default function MenuPage({ currentUser }) {
       <Col>
         <Link
           to={`/session/${currentUser.uid}`}
-          currentUser={currentUser}
-          openSessions={() => FetchSessions()}
           onClick={() => CreateSession(currentUser, position)}
         >
           CREATE A NEW SESSION
