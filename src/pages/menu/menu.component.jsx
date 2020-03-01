@@ -78,7 +78,7 @@ const SessionList = () => {
 const CreateSession = (currentUser, position) => {
   const openSessions = FetchSessions();
   {
-    openSessions.map((user, id) => console.log(user.id));
+    openSessions.map((user, id) => console.log(user));
   }
   // const [database, setDatabase] = useState(FetchSessions());
 
