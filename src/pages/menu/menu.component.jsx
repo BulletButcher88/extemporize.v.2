@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import firebase, { auth } from "../../firebase/firebase";
 import "../menu/menu.style.scss";
 import { usePosition } from "../../components/geolocation/position";
+import defimage from "../../asset/serveimage.png";
 
 const FetchSessions = () => {
   const [session, setSession] = useState([]);
@@ -37,55 +38,49 @@ function Spin() {
 }
 
 const SessionList = () => {
-  const defImage = "../../utils/serveimage.png";
-
   const openSessions = FetchSessions();
   return (
     <>
-      <Col>
-        {openSessions.map((post, id) => (
-          <Link key={id} to={`/session/${post.id}`}>
-            <div key={id}>
-              {post.data ? (
-                <img
-                  src={post.data[0].photoURL}
-                  alt={defImage}
-                  style={{
-                    width: 40,
-                    height: 40,
-                    borderRadius: "50%",
-                    zIndex: { id }
-                  }}
-                />
-              ) : (
-                <img
-                  src={require("../../utils/serveimage.png")}
-                  alt={require("../../utils/serveimage.png")}
-                  style={{
-                    width: 40,
-                    height: 40,
-                    borderRadius: "50%",
-                    zIndex: { id }
-                  }}
-                />
-              )}
-            </div>
-          </Link>
-        ))}
-      </Col>
+      <div
+        className="spinner-grow text-dark"
+        role="status"
+        style={{ position: "absolute", top: "35%", left: "47vw" }}
+      />
+      {openSessions.map((post, id) => (
+        <Link key={id} to={`/session/${post.id}`}>
+          {post.data ? (
+            <img
+              key={id}
+              src={post.data[0].photoURL}
+              alt={defimage}
+              style={{
+                width: 50,
+                height: 50,
+                borderRadius: "50%",
+                zIndex: { id }
+              }}
+            />
+          ) : (
+            <img
+              key={id}
+              src={defimage}
+              alt={defimage}
+              style={{
+                width: 50,
+                height: 50,
+                borderRadius: "50%",
+                zIndex: { id }
+              }}
+            />
+          )}
+        </Link>
+      ))}
     </>
   );
 };
 
 const CreateSession = (currentUser, position) => {
-  // const openSessions = FetchSessions();
-  // {
-  //   openSessions.map((user, id) => console.log(user));
-  // }
-  // const [database, setDatabase] = useState(FetchSessions());
-
   const { providerData } = currentUser;
-  // useEffect(() => {
   firebase
     .firestore()
     .collection("users")
@@ -99,7 +94,6 @@ const CreateSession = (currentUser, position) => {
     .then(function() {
       console.log("USER Session successfully written!");
     }, []);
-  // });
 };
 
 export default function MenuPage({ currentUser }) {
@@ -137,14 +131,16 @@ export default function MenuPage({ currentUser }) {
 
   return (
     <div className="menu-container">
-      <SessionList />
+      <div className="session-map">
+        <SessionList />
+      </div>
       <h1>OR</h1>
       <Col>
         <Link
           to={`/session/${currentUser.uid}`}
           onClick={() => CreateSession(currentUser, position)}
         >
-          CREATE A NEW SESSION
+          <div className="create-session">CREATE A NEW SESSION</div>
         </Link>
       </Col>
       <h1>OR</h1>

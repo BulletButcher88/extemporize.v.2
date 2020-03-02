@@ -6,6 +6,11 @@ button {
   margin: 20px;
 }
 
+.session-map {
+  text-align: center;
+  height: 70vh;
+}
+
 .menu-container {
   text-align: center;
   height: auto;
@@ -25,4 +30,8 @@ button {
 
 .spinner-grow {
   background-color: white;
+}
+
+.create-session {
+  text-decoration: none;
 }
