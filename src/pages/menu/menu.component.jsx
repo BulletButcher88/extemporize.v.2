@@ -32,7 +32,7 @@ function Spin() {
     <div>
       {" "}
       Loading...
-      <div className="spinner-grow text-dark" role="status"></div>
+      {/* <div className="spinner-grow text-dark" role="status"></div> */}
     </div>
   );
 }
@@ -41,11 +41,11 @@ const SessionList = () => {
   const openSessions = FetchSessions();
   return (
     <>
-      <div
+      {/* <div
         className="spinner-grow text-dark"
         role="status"
         style={{ position: "absolute", top: "35%", left: "47vw" }}
-      />
+      /> */}
       {openSessions.map((post, id) => (
         <Link key={id} to={`/session/${post.id}`}>
           {post.data ? (
@@ -117,6 +117,11 @@ export default function MenuPage({ currentUser }) {
     return (
       <>
         <div className="menu-container">
+          <div
+            className="spinner-grow text-dark"
+            role="status"
+            style={{ position: "absolute", top: "35%", left: "47vw" }}
+          />
           <div className="spin-container">
             <Spin />
           </div>
@@ -131,6 +136,11 @@ export default function MenuPage({ currentUser }) {
 
   return (
     <div className="menu-container">
+      <div
+        className="spinner-grow text-dark"
+        role="status"
+        style={{ position: "absolute", top: "35%", left: "47vw" }}
+      />
       <div className="session-map">
         <SessionList />
       </div>
