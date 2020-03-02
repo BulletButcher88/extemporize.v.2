@@ -83,21 +83,21 @@ const CreateSession = (currentUser, position) => {
   // const [database, setDatabase] = useState(FetchSessions());
 
   const { providerData } = currentUser;
-  useEffect(() => {
-    firebase
-      .firestore()
-      .collection("users")
-      .doc(currentUser.uid)
-      .update({
-        id: currentUser.uid,
-        data: providerData,
-        position: position,
-        session: {}
-      })
-      .then(function() {
-        console.log("USER Session successfully written!");
-      }, []);
-  });
+  // useEffect(() => {
+  firebase
+    .firestore()
+    .collection("users")
+    .doc(`${currentUser.uid}`)
+    .set({
+      id: currentUser.uid,
+      data: providerData,
+      position: position,
+      session: {}
+    })
+    .then(function() {
+      console.log("USER Session successfully written!");
+    }, []);
+  // });
 };
 
 export default function MenuPage({ currentUser }) {
