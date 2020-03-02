@@ -6,7 +6,7 @@ import HomePage from "./pages/homepage/homepage.component";
 import MenuPage from "./pages/menu/menu.component";
 import SessionPage from "./pages/session/session.component";
 import SignInAndSignUpPage from "./pages/sign-in-and-sign-up/sign-in-and-sign-up.component";
-import "./App.css";
+import "./App.scss";
 import { auth } from "./firebase/firebase";
 class App extends React.Component {
   constructor() {

@@ -1,0 +1,9 @@
+$primary: #81899b;
+$background: white;
+
+* {
+  margin: 0;
+  background-color: $primary;
+  color: $background;
+  /* max-width: 50ch; */
+}

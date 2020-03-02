@@ -101,7 +101,7 @@ const BarContent = Keyframes.Spring(async next => {
       left: barEdgePosition,
       width: "22vw",
       height: 20,
-      background: "tomato"
+      background: "white"
     });
 
     await next({
@@ -142,7 +142,7 @@ const Tempo = ({ tempo }) => {
               right: "48%",
               width: 20,
               height: 80,
-              background: "tomato"
+              background: "white"
             }}
           />
         </>

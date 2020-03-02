@@ -1,3 +1,6 @@
+$primary: #81899b;
+$background: white;
+
 .popup {
   position: fixed;
   width: 100%;
@@ -42,7 +45,7 @@
 .stop-btn {
   height: 15vh;
   width: 30vw;
-  background-color: rgb(249, 75, 89);
+  background-color: $background;
 }
 
 .submit {
@@ -56,7 +59,7 @@
 }
 
 .submit-btn {
-  border-color: rgb(249, 75, 89) transparent;
+  border-color: $background transparent;
   border-style: solid;
   border-width: 0px 80px 110px 80px;
 }
@@ -83,7 +86,7 @@
   -webkit-appearance: none;
   width: 90%;
   height: 10px;
-  background: rgb(249, 75, 89);
+  background: $background;
   outline: none;
   opacity: 0.8;
   -webkit-transition: 0.3s;
@@ -99,7 +102,7 @@
   appearance: none;
   width: 10px;
   height: 35px;
-  background-color: rgb(254, 128, 138);
+  background-color: $background;
   cursor: pointer;
 }
 
@@ -123,17 +126,17 @@
 
 input[type="text"] {
   width: 90%;
-  color: rgb(3, 3, 123);
+  color: $primary;
   box-sizing: border-box;
-  border: 2px solid rgb(248, 115, 115);
+  border: 2px solid $background;
   border-radius: 2px;
   font-size: 20px;
-  background-color: rgb(249, 75, 89);
+  background-color: $background;
   background-repeat: no-repeat;
   padding: 12px 27vw 12px 10vw;
 }
 ::placeholder {
-  color: rgb(3, 3, 123);
+  color: $primary;
 }
 .temp {
   grid-row: 7/9;
@@ -141,7 +144,7 @@ input[type="text"] {
   height: 7.2rem;
   width: 7.2rem;
   border-radius: 50%;
-  background-color: rgb(249, 75, 89);
+  background-color: rgb(249, 249, 249);
   position: relative;
   left: 50%;
   top: 50%;

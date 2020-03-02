@@ -29,8 +29,8 @@ export default function NoteKnob(props, { onChange }) {
             name="note"
             onChange={() => props.onChange(value)}
           >
-            <CircularProgress strokeWidth={2} stroke="rgb(249, 75, 89)" />
-            <CircularThumb fill="rgb(249, 75, 89)" />
+            <CircularProgress strokeWidth={2} stroke="white" />
+            <CircularThumb fill="white" />
           </CircularInput>
           <text
             x={100}
@@ -38,7 +38,7 @@ export default function NoteKnob(props, { onChange }) {
             textAnchor="middle"
             dy="0.7em"
             fontWeight="bold"
-            fill="rgb(249, 75, 89)"
+            fill="white"
           >
             {keyNote}
           </text>
