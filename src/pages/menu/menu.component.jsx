@@ -37,6 +37,8 @@ function Spin() {
 }
 
 const SessionList = () => {
+  const defImage = "../../utils/serveimage.png";
+
   const openSessions = FetchSessions();
   return (
     <>
@@ -47,7 +49,7 @@ const SessionList = () => {
               {post.data ? (
                 <img
                   src={post.data[0].photoURL}
-                  alt="https://picsum.photos/200"
+                  alt={defImage}
                   style={{
                     width: 40,
                     height: 40,
@@ -57,8 +59,8 @@ const SessionList = () => {
                 />
               ) : (
                 <img
-                  src="https://picsum.photos/200"
-                  alt="https://picsum.photos/200"
+                  src={require("../../utils/serveimage.png")}
+                  alt={require("../../utils/serveimage.png")}
                   style={{
                     width: 40,
                     height: 40,
