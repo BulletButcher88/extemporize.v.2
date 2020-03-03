@@ -37,15 +37,31 @@ function Spin() {
   );
 }
 
-const SessionList = () => {
+const sessionLocator = (openSessions, position) => {
+  let pos = {};
+  const { latitude, longitude, timestamp } = position.position;
+  openSessions.map((data, i) =>
+    data.position
+      ? (pos = {
+          latPosition: data.position.latitude - latitude,
+          longPosition: data.position.longitude - longitude
+        })
+      : null
+  );
+  return pos;
+};
+
+const SessionList = position => {
   const openSessions = FetchSessions();
+  console.log(sessionLocator(openSessions, position));
+
   return (
     <>
-      {/* <div
+      <div
         className="spinner-grow text-dark"
         role="status"
         style={{ position: "absolute", top: "35%", left: "47vw" }}
-      /> */}
+      />
       {openSessions.map((post, id) => (
         <Link key={id} to={`/session/${post.id}`}>
           {post.data ? (
@@ -57,7 +73,10 @@ const SessionList = () => {
                 width: 50,
                 height: 50,
                 borderRadius: "50%",
-                zIndex: { id }
+                zIndex: { id },
+                position: "absolute",
+                top: "35%",
+                left: "47vw"
               }}
             />
           ) : (
@@ -69,7 +88,10 @@ const SessionList = () => {
                 width: 50,
                 height: 50,
                 borderRadius: "50%",
-                zIndex: { id }
+                zIndex: { id },
+                position: "absolute",
+                top: "35%",
+                left: "47vw"
               }}
             />
           )}
@@ -93,25 +115,19 @@ const CreateSession = (currentUser, position) => {
     })
     .then(function() {
       console.log("USER Session successfully written!");
-    }, []);
+    });
 };
 
 export default function MenuPage({ currentUser }) {
   const { latitude, longitude, timestamp } = usePosition();
-  const [position, setPosition] = useState([
-    {
-      latitude: latitude,
-      longitude: longitude,
-      timestamp: timestamp
-    }
-  ]);
+  const [position, setPosition] = useState([{}]);
   setTimeout(function() {
     setPosition({
       latitude: latitude,
       longitude: longitude,
       timestamp: Math.round(new Date().getTime() / 100)
     });
-  }, 2000);
+  }, 10);
 
   if (!position.latitude) {
     return (
@@ -142,17 +158,15 @@ export default function MenuPage({ currentUser }) {
         style={{ position: "absolute", top: "35%", left: "47vw" }}
       />
       <div className="session-map">
-        <SessionList />
+        <SessionList position={position} />
       </div>
       <h1>OR</h1>
-      <Col>
-        <Link
-          to={`/session/${currentUser.uid}`}
-          onClick={() => CreateSession(currentUser, position)}
-        >
-          <div className="create-session">CREATE A NEW SESSION</div>
-        </Link>
-      </Col>
+      <Link
+        to={`/session/${currentUser.uid}`}
+        onClick={() => CreateSession(currentUser, position)}
+      >
+        <div className="create-session">CREATE A NEW SESSION</div>
+      </Link>
       <h1>OR</h1>
       <div className="option" onClick={() => auth.signOut()}>
         SIGN OUT
