@@ -37,30 +37,32 @@ function Spin() {
   );
 }
 
-const sessionLocator = (openSessions, position) => {
-  let pos = {};
-  const { latitude, longitude, timestamp } = position.position;
-  openSessions.map((data, i) =>
-    data.position
-      ? (pos = {
-          latPosition: data.position.latitude - latitude,
-          longPosition: data.position.longitude - longitude
-        })
-      : null
-  );
-  return pos;
-};
+// const sessionLocator = (openSessions, position) => {
+//   let pos = {};
+//   const { latitude, longitude, timestamp } = position.position;
+//   openSessions.map((data, i) =>
+//     data.position
+//       ? (pos = {
+//           top: (data.position.latitude - latitude) * 1000,
+//           bottom: (data.position.longitude - longitude) * 1000
+//         })
+//       : null
+//   );
+//   return pos;
+// };
 
 const SessionList = position => {
+  const { latitude, longitude, timestamp } = position.position;
+
   const openSessions = FetchSessions();
-  console.log(sessionLocator(openSessions, position));
+  // console.log(sessionLocator(openSessions, position));
 
   return (
     <>
       <div
         className="spinner-grow text-dark"
         role="status"
-        style={{ position: "absolute", top: "35%", left: "47vw" }}
+        style={{ position: "absolute", top: "35%", left: "47vw", zIndex: 30 }}
       />
       {openSessions.map((post, id) => (
         <Link key={id} to={`/session/${post.id}`}>
@@ -75,8 +77,10 @@ const SessionList = position => {
                 borderRadius: "50%",
                 zIndex: { id },
                 position: "absolute",
-                top: "35%",
-                left: "47vw"
+                top: `${((post.position.latitude - latitude) / 2) * 1000 +
+                  35}%`,
+                left: `${((post.position.longitude - longitude) / 2) * 1000 +
+                  47}vw`
               }}
             />
           ) : (
