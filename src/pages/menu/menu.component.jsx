@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import firebase, { auth } from "../../firebase/firebase";
 import "../menu/menu.style.scss";
@@ -37,29 +36,15 @@ function Spin() {
   );
 }
 
-// const sessionLocator = (openSessions, position) => {
-//   let pos = {};
-//   const { latitude, longitude, timestamp } = position.position;
-//   openSessions.map((data, i) =>
-//     data.position
-//       ? (pos = {
-//           top: (data.position.latitude - latitude) * 1000,
-//           bottom: (data.position.longitude - longitude) * 1000
-//         })
-//       : null
-//   );
-//   return pos;
-// };
-
 const SessionList = position => {
-  const { latitude, longitude, timestamp } = position.position;
+  const { latitude, longitude } = position.position;
   const openSessions = FetchSessions();
-  const maxDistance = navigator.geolocation.getCurrentPosition(
-    console.log,
-    null,
-    { enableHighAccuracy: true, maximumAge: 300 }
-  );
-  console.log(maxDistance);
+  // const maxDistance = navigator.geolocation.getCurrentPosition(
+  //   console.log,
+  //   null,
+  //   { enableHighAccuracy: true, maximumAge: 300 }
+  // );
+  // console.log(maxDistance.coords);
 
   return (
     <>
@@ -127,7 +112,7 @@ const CreateSession = (currentUser, position) => {
 };
 
 export default function MenuPage({ currentUser }) {
-  const { latitude, longitude, timestamp } = usePosition();
+  const { latitude, longitude } = usePosition();
   const [position, setPosition] = useState([{}]);
   setTimeout(function() {
     setPosition({
