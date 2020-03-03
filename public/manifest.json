@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Xtemporize",
+  "name": "Xtemporize - Improvising App",
   "icons": [
     {
       "src": "favicon.ico",
@@ -8,7 +8,7 @@
       "type": "image/x-icon"
     },
     {
-      "src": "logo192.png",
+      "src": "serveimage.png",
       "type": "image/png",
       "sizes": "192x192"
     },
