@@ -66,10 +66,8 @@ const SessionList = position => {
                 borderRadius: "50%",
                 zIndex: { id },
                 position: "absolute",
-                top: `${((post.position.latitude - latitude) / 2) * 1000 +
-                  35}%`,
-                left: `${((post.position.longitude - longitude) / 2) * 1000 +
-                  47}vw`
+                top: `${(post.position.latitude - latitude) * 1000 + 35}%`,
+                left: `${(post.position.longitude - longitude) * 1000 + 47}%`
               }}
             />
           ) : (
@@ -153,16 +151,16 @@ export default function MenuPage({ currentUser }) {
       <div className="session-map">
         <SessionList position={position} />
       </div>
-      <h1>OR</h1>
+
       <Link
         to={`/session/${currentUser.uid}`}
         onClick={() => CreateSession(currentUser, position)}
       >
-        <div className="create-session">CREATE A NEW SESSION</div>
+        <div className="create-session">NEW SESSION</div>
       </Link>
       <h1>OR</h1>
       <div className="option" onClick={() => auth.signOut()}>
-        SIGN OUT
+        LOG OUT
       </div>
     </div>
   );
