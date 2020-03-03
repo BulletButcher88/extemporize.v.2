@@ -53,9 +53,13 @@ function Spin() {
 
 const SessionList = position => {
   const { latitude, longitude, timestamp } = position.position;
-
   const openSessions = FetchSessions();
-  // console.log(sessionLocator(openSessions, position));
+  const maxDistance = navigator.geolocation.getCurrentPosition(
+    console.log,
+    null,
+    { enableHighAccuracy: true, maximumAge: 300 }
+  );
+  console.log(maxDistance);
 
   return (
     <>
