@@ -39,20 +39,13 @@ function Spin() {
 const SessionList = position => {
   const { latitude, longitude } = position.position;
   const openSessions = FetchSessions();
-  // const maxDistance = navigator.geolocation.getCurrentPosition(
-  //   console.log,
-  //   null,
-  //   { enableHighAccuracy: true, maximumAge: 300 }
-  // );
-  // console.log(maxDistance.coords);
+
+  const proxyFilter = (pos1, pos2) => {
+    return (pos1 - pos2) * 600;
+  };
 
   return (
     <>
-      <div
-        className="spinner-grow text-dark"
-        role="status"
-        style={{ position: "absolute", top: "35%", left: "47vw", zIndex: 30 }}
-      />
       {openSessions.map((post, id) => (
         <Link key={id} to={`/session/${post.id}`}>
           {post.data ? (
@@ -66,8 +59,9 @@ const SessionList = position => {
                 borderRadius: "50%",
                 zIndex: { id },
                 position: "absolute",
-                top: `${(post.position.latitude - latitude) * 1000 + 35}%`,
-                left: `${(post.position.longitude - longitude) * 1000 + 47}%`
+                bottom: `${proxyFilter(post.position.latitude, latitude) +
+                  50}%`,
+                left: `${proxyFilter(post.position.longitude, longitude) + 50}%`
               }}
             />
           ) : (
@@ -81,7 +75,7 @@ const SessionList = position => {
                 borderRadius: "50%",
                 zIndex: { id },
                 position: "absolute",
-                top: "35%",
+                bottom: "35%",
                 left: "47vw"
               }}
             />
