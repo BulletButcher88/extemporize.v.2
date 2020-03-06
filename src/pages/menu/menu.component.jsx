@@ -26,16 +26,6 @@ const FetchSessions = () => {
   return session;
 };
 
-function Spin() {
-  return (
-    <div>
-      {" "}
-      Loading...
-      {/* <div className="spinner-grow text-dark" role="status"></div> */}
-    </div>
-  );
-}
-
 const SessionList = position => {
   const { latitude, longitude } = position.position;
   const openSessions = FetchSessions();
@@ -46,6 +36,7 @@ const SessionList = position => {
 
   return (
     <>
+      <div className="proxy-scanner" />
       {openSessions.map((post, id) => (
         <Link key={id} to={`/session/${post.id}`}>
           {post.data ? (
@@ -123,11 +114,8 @@ export default function MenuPage({ currentUser }) {
             role="status"
             style={{ position: "absolute", top: "35%", left: "47vw" }}
           />
-          <div className="spin-container">
-            <Spin />
-          </div>
-          <h1>OR</h1>
-          <div className="option" onClick={() => auth.signOut()}>
+          <div className="spin-container"></div>
+          <div className="sign-out" onClick={() => auth.signOut()}>
             SIGN OUT
           </div>
         </div>
@@ -137,24 +125,18 @@ export default function MenuPage({ currentUser }) {
 
   return (
     <div className="menu-container">
-      <div
-        className="spinner-grow text-dark"
-        role="status"
-        style={{ position: "absolute", top: "35%", left: "47vw" }}
-      />
       <div className="session-map">
         <SessionList position={position} />
       </div>
-
+      <code>Join one of the sessions in your area or start a new session</code>
       <Link
         to={`/session/${currentUser.uid}`}
         onClick={() => CreateSession(currentUser, position)}
       >
         <div className="create-session">NEW SESSION</div>
       </Link>
-      <h1>OR</h1>
-      <div className="option" onClick={() => auth.signOut()}>
-        LOG OUT
+      <div className="sign-out" onClick={() => auth.signOut()}>
+        SIGN OUT
       </div>
     </div>
   );

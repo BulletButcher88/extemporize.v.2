@@ -5,6 +5,11 @@ input {
 button {
   margin: 20px;
 }
+.sign-out {
+  position: absolute;
+  top: 5px;
+  right: 20px;
+}
 
 .session-map {
   text-align: center;
@@ -35,4 +40,30 @@ button {
 
 .create-session {
   text-decoration: none;
+}
+
+.proxy-scanner {
+  background: url("../../asset/proxyscan.png") no-repeat;
+  height: 87vh;
+  background-size: 27vh;
+  background-position: center;
+  width: 100%;
+  min-width: 70vw;
+  animation-name: spin;
+  animation-duration: 5000ms;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  /* transform: rotate(3deg); */
+  /* transform: rotate(0.3rad);/ */
+  /* transform: rotate(3grad); */
+  /* transform: rotate(.03turn);  */
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
