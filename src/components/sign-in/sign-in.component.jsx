@@ -105,7 +105,7 @@ class SignIn extends React.Component {
           </div>
           <code>
             Xtemporize app equips musicians with one source of truth, to receive
-            request from their auidence.
+            request from their audience.
           </code>
         </form>
       </div>
