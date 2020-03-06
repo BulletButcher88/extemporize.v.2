@@ -1,8 +1,8 @@
 .homepage {
-  height: 100.1vh;
-
-  background-image: url("./asset/sk.png");
-  background-size: cover;
+  height: 101.3vh;
+  background: url("../../asset/Frame.png") no-repeat;
+  background-size: 55vh;
+  max-height: fit-content;
   background-position: center;
   position: relative;
   overflow: hidden;
@@ -14,25 +14,15 @@
 
 .btn-enter {
   position: absolute;
-  opacity: 0.8;
-  top: 50%;
-  left: 13vw;
+  top: 20vh;
+  width: 100%;
+  text-align: center;
   color: rgb(66, 66, 66);
-  width: inherit;
-  font-weight: 700;
-  font-size: 11vw;
-  padding: 7vw;
+  font-weight: 300;
+  font-size: 4vh;
+  padding: 2vh;
   cursor: pointer;
   transition: transform 2s, font-weight 2s, color 2s;
-}
-
-.btn-enter:hover {
-  opacity: 0.9;
-  font-weight: 700;
-  color: rgb(196, 196, 196);
-  transform: scale(1, 1);
-  background-color: #3c3c3c;
-  transform: rotate(5deg);
 }
 
 .user-name {

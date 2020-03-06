@@ -7,7 +7,7 @@ const HomePage = ({ currentUser }) => (
     <div className="homepage">
       {/* <img className="homeImage" src={Diamond} /> */}
       <Link className="btn-enter" to="/menu" style={{ textDecoration: "none" }}>
-        EXTEMPORISE
+        enter
       </Link>
       {currentUser ? (
         <span className="user-name">Hello => {currentUser.displayName}</span>
