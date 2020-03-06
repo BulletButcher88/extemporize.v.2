@@ -103,6 +103,10 @@ class SignIn extends React.Component {
               Google
             </CustomButton>
           </div>
+          <code>
+            Xtemporize app equips musicians with one source of truth, to receive
+            request from their auidence.
+          </code>
         </form>
       </div>
     );
