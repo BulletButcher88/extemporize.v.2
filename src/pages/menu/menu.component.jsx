@@ -36,6 +36,7 @@ const SessionList = position => {
 
   return (
     <>
+      <div className="proxy-flash"></div>
       <div className="proxy-scanner" />
       {openSessions.map((post, id) => (
         <Link key={id} to={`/session/${post.id}`}>
