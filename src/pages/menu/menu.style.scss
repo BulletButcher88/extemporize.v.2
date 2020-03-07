@@ -50,6 +50,7 @@ button {
 }
 
 .proxy-scanner {
+  position: relative;
   background: url("../../asset/proxyscan.png") no-repeat;
   height: 87vh;
   background-size: 27vh;
@@ -67,18 +68,19 @@ button {
 }
 .proxy-flash {
   background-image: radial-gradient(
-    rgba(160, 156, 156, 0.411),
-    rgba(87, 87, 87, 0.185),
+    rgba(108, 108, 108, 0.411),
+    rgba(62, 62, 62, 0.084),
     rgba(26, 26, 26, 0)
   );
   position: absolute;
-  top: 35%;
-  left: 50% - 100px;
+  top: 44%;
+  left: 50%;
   border-radius: 50%;
-  height: 100px;
-  width: 100px;
+  width: 300px;
+  height: 300px;
+  margin: -150px 0 0 -150px;
   animation-name: radarglow;
-  animation-duration: 3500ms;
+  animation-duration: 350ms;
   animation-iteration-count: infinite;
   animation-timing-function: linear;
 }
@@ -97,12 +99,12 @@ button {
     background-color: rgba(49, 48, 48, 0.447);
   }
   to {
-    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.125);
   }
 }
 @keyframes radarglow {
   from {
-    background-color: rgba(103, 103, 103, 0.151);
+    background-color: rgba(63, 63, 63, 0.194);
   }
   to {
     background-color: rgba(0, 0, 0, 0);
