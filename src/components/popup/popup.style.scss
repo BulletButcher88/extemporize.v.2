@@ -10,6 +10,7 @@ $background: white;
   right: 0;
   bottom: 0;
   margin: auto;
+  display: flex;
 }
 
 .close_btn {
@@ -23,10 +24,11 @@ $background: white;
 /* GRID LAYOUT  */
 
 .container {
+  justify-content: space-around;
   margin: 1px;
   height: 100vh;
   display: grid;
-  grid-template-rows: 1fr 1fr 0.8fr 0.8fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 0.8fr 0.8fr 1fr 1fr 1fr 1fr 0.6fr;
   grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 
@@ -145,10 +147,10 @@ input[type="text"] {
   width: 7.2rem;
   border-radius: 50%;
   background-color: rgb(249, 249, 249);
-  position: relative;
-  left: 50%;
-  top: 50%;
+  position: initial;
   transform: translate(-50%, -50%);
+  float: none;
+  margin: 12vh 11vh;
 }
 
 .notes {
