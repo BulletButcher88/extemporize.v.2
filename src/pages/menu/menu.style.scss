@@ -8,8 +8,9 @@ button {
 .sign-out {
   color: grey;
   position: absolute;
-  top: 3px;
-  right: 30px;
+  top: 0;
+  right: 0;
+  width: 33.3%;
   padding: 10px;
 }
 
@@ -44,32 +45,32 @@ button {
   z-index: 30;
   position: absolute;
   top: 0;
-  width: 200px;
+  width: 66.6%;
   padding: 10px;
   animation-name: glow;
-  animation-duration: 800ms;
+  animation-duration: 2000ms;
   animation-iteration-count: infinite;
   animation-timing-function: linear;
   text-decoration: none;
 }
 
-.proxy-scanner {
-  position: relative;
-  background: url("../../asset/proxyscan.png") no-repeat;
-  height: 87vh;
-  background-size: 27vh;
-  background-position: center;
-  width: 100%;
-  min-width: 70vw;
-  animation-name: spin;
-  animation-duration: 5000ms;
-  animation-iteration-count: infinite;
-  animation-timing-function: ease-in-out;
-  /* transform: rotate(3deg); */
-  /* transform: rotate(0.3rad);/ */
-  /* transform: rotate(3grad); */
-  /* transform: rotate(.03turn);  */
-}
+// .proxy-scanner {
+//   position: relative;
+//   background: url("../../asset/proxyscan.png") no-repeat;
+//   height: 87vh;
+//   background-size: 27vh;
+//   background-position: center;
+//   width: 100%;
+//   min-width: 70vw;
+//   animation-name: spin;
+//   animation-duration: 5000ms;
+//   animation-iteration-count: infinite;
+//   animation-timing-function: ease-in-out;
+//   /* transform: rotate(3deg); */
+//   /* transform: rotate(0.3rad);/ */
+//   /* transform: rotate(3grad); */
+//   /* transform: rotate(.03turn);  */
+// }
 .proxy-flash {
   background-image: radial-gradient(
     rgba(99, 99, 99, 0.411),
@@ -89,28 +90,11 @@ button {
   animation-timing-function: ease-in-out;
 }
 
-@keyframes spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
 @keyframes glow {
   from {
-    background-color: rgba(49, 48, 48, 0.447);
+    background-color: rgba(103, 103, 103, 0.5);
   }
   to {
     background-color: rgba(0, 0, 0, 0.125);
-  }
-}
-@keyframes radarglow {
-  from {
-    background-color: rgba(26, 26, 26, 0.356);
-  }
-  to {
-    background-color: rgba(0, 0, 0, 0);
   }
 }
