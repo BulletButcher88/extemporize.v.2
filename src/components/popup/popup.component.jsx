@@ -73,7 +73,7 @@ class Popup extends React.Component {
     return (
       <div className="popup">
         <div className="popup\_inner">
-          {/* <h5>{JSON.stringify(this.props.session)}</h5> */}
+          <h5>{JSON.stringify(this.props.session.volume)}</h5>
           <div className="container">
             <div className="stop">
               <div className="stop-btn" onClick={this.props.closePopup}></div>
@@ -88,6 +88,7 @@ class Popup extends React.Component {
             <div className="volume">
               <input
                 name="volume"
+                defaultValue={this.props.session.volume}
                 value={volume}
                 onChange={this.handleChange}
                 type="range"
