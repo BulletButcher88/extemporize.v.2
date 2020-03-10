@@ -14,12 +14,12 @@ class Popup extends React.Component {
     super(props);
     this.state = {
       stop: false,
-      volume: 5,
-      bridge: 0,
-      style: "",
-      description: "",
-      note: "",
-      tempo: null,
+      volume: props.session.volume,
+      bridge: props.session.bridge,
+      style: props.session.style,
+      description: props.session.description,
+      note: props.session.note,
+      tempo: props.session.tempo,
       timestamp: Math.round(new Date().getTime() / 100)
     };
     this.receiveTempo = this.receiveTempo.bind(this);
@@ -73,7 +73,7 @@ class Popup extends React.Component {
     return (
       <div className="popup">
         <div className="popup\_inner">
-          <h5>{JSON.stringify(this.props.session.volume)}</h5>
+          {/* <h5>{JSON.stringify(this.props.session.volume)}</h5> */}
           <div className="container">
             <div className="stop">
               <div className="stop-btn" onClick={this.props.closePopup}></div>
@@ -86,9 +86,9 @@ class Popup extends React.Component {
               ></div>
             </div>
             <div className="volume">
+              <span> {volume - 5}</span>
               <input
                 name="volume"
-                defaultValue={this.props.session.volume}
                 value={volume}
                 onChange={this.handleChange}
                 type="range"
@@ -98,6 +98,7 @@ class Popup extends React.Component {
               />
             </div>
             <div className="bridge">
+              <span>{bridge}</span>
               <input
                 name="bridge"
                 value={bridge}
@@ -111,11 +112,12 @@ class Popup extends React.Component {
             </div>
             <div className="style">
               <input
+                type="text"
                 name="style"
+                placeholder={style}
                 value={style}
                 onChange={this.handleChange}
                 className="styleInIt"
-                type="text"
               />
             </div>
             <div className="description">
