@@ -1,9 +1,5 @@
 import React, { useState } from "react";
-import {
-  CircularInput,
-  CircularProgress,
-  CircularThumb
-} from "react-circular-input";
+import { CircularInput, CircularThumb } from "react-circular-input";
 import "./note-knob.style.scss";
 
 const key = ["A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"];

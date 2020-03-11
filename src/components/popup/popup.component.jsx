@@ -73,7 +73,6 @@ class Popup extends React.Component {
     return (
       <div className="popup">
         <div className="popup\_inner">
-          {/* <h5>{JSON.stringify(this.props.session.volume)}</h5> */}
           <div className="container">
             <div className="stop">
               <div className="stop-btn" onClick={this.props.closePopup}></div>
@@ -86,7 +85,7 @@ class Popup extends React.Component {
               ></div>
             </div>
             <div className="volume">
-              <span> {volume - 5}</span>
+              <span> {volume ? volume - 5 : null}</span>
               <input
                 name="volume"
                 value={volume}
@@ -114,8 +113,8 @@ class Popup extends React.Component {
               <input
                 type="text"
                 name="style"
-                placeholder={style}
                 value={style}
+                // onfocus={() => (this.target = "")}
                 onChange={this.handleChange}
                 className="styleInIt"
               />
@@ -124,6 +123,7 @@ class Popup extends React.Component {
               <input
                 name="description"
                 value={description}
+                onFocus={clearThis(this)}
                 onChange={this.handleChange}
                 className="descriptionInit"
                 type="text"
@@ -151,6 +151,10 @@ class Popup extends React.Component {
       </div>
     );
   }
+}
+
+function clearThis(target) {
+  return (target.value = "");
 }
 
 export default Popup;
