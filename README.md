@@ -1,4 +1,6 @@
-Extemporize is an app that helps communicates to members in a band what to play. Ideal for improvisation and experimental performances
+Extemporize is an app that allows musicians who play improvisation or experimental music to have a one source of truth (one page), which allows the audience to submit instructions.
+
+Deployment : https://xtemporize.co/
 
 To run this project directory clone and run:
 
