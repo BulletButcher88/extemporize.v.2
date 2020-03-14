@@ -13,7 +13,6 @@ export default function NoteKnob(props, { onChange }) {
   return (
     <>
       <div className="note-wheel">
-        <div className="rod">2</div>
         <CircularInput
           value={stepValue(value)}
           onChange={v => setValue(stepValue(v))}
