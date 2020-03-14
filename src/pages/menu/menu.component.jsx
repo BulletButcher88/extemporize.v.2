@@ -22,7 +22,7 @@ const FetchSessions = () => {
         },
         err => console.log("Error with Snapshot", err)
       );
-  });
+  }, []);
   return session;
 };
 
@@ -52,8 +52,8 @@ const SessionList = position => {
                 zIndex: { id },
                 position: "absolute",
                 bottom: `${proxyFilter(post.position.latitude, latitude) +
-                  50}%`,
-                left: `${proxyFilter(post.position.longitude, longitude) + 50}%`
+                  45}%`,
+                left: `${proxyFilter(post.position.longitude, longitude) + 45}%`
               }}
             />
           ) : (

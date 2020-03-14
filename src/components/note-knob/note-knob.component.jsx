@@ -16,7 +16,7 @@ export default function NoteKnob(props, { onChange }) {
         <div className="rod">2</div>
         <CircularInput
           value={stepValue(value)}
-          onFocus={v => setValue(stepValue(v))}
+          onChange={v => setValue(stepValue(v))}
         >
           <CircularInput
             x={45}
@@ -26,7 +26,7 @@ export default function NoteKnob(props, { onChange }) {
             name="note"
             onChange={() => props.onChange(value)}
           >
-            <CircularThumb fill="white" radius={60} />
+            <CircularThumb fill="white" />
           </CircularInput>
           <text
             x={100}

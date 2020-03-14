@@ -14,12 +14,12 @@ class Popup extends React.Component {
     super(props);
     this.state = {
       stop: false,
-      volume: props.session.volume,
-      bridge: props.session.bridge,
-      style: props.session.style,
-      description: props.session.description,
-      note: props.session.note,
-      tempo: props.session.tempo,
+      volume: props.session.volume || "",
+      bridge: props.session.bridge || "",
+      style: props.session.style || "",
+      description: props.session.description || "",
+      note: props.session.note || "",
+      tempo: props.session.tempo || "",
       timestamp: Math.round(new Date().getTime() / 100)
     };
     this.receiveTempo = this.receiveTempo.bind(this);
@@ -60,7 +60,7 @@ class Popup extends React.Component {
         session: this.state
       })
       .then(function() {
-        // console.log("SESSION POST successfully saved!");
+        console.log("SESSION POST successfully saved!");
       })
       .catch(function(error) {
         console.error("Error writing document: ", error);
@@ -123,7 +123,7 @@ class Popup extends React.Component {
               <input
                 name="description"
                 value={description}
-                onFocus={clearThis(this)}
+                // onFocus={clearThis(this)}
                 onChange={this.handleChange}
                 className="descriptionInit"
                 type="text"
@@ -153,8 +153,8 @@ class Popup extends React.Component {
   }
 }
 
-function clearThis(target) {
-  return (target.value = "");
-}
+// function clearThis(target) {
+//   return (target.value = "");
+// }
 
 export default Popup;
