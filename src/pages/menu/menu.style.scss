@@ -56,10 +56,13 @@ button {
 
 .proxy-scanner {
   background: url("../../asset/proxyscan.png") no-repeat;
-  height: 100vh;
-  background-size: 80vw;
+  background-size: cover;
   background-position: center;
-  width: 100vw;
+  position: absolute;
+  left: 25vw;
+  top: 50vh;
+  height: 30px;
+  width: 50vw;
   animation-name: spin;
   animation-duration: 7000ms;
   animation-iteration-count: infinite;
@@ -77,24 +80,6 @@ code {
   width: 100vw;
   bottom: 10%;
   left: 0;
-}
-.proxy-flash {
-  background-image: radial-gradient(
-    rgba(99, 99, 99, 0.411),
-    rgba(62, 62, 62, 0),
-    rgba(26, 26, 26, 0)
-  );
-
-  position: absolute;
-  top: 0%;
-  background-position: center;
-  border-radius: 50%;
-  width: 100vw;
-  height: 100vh;
-  animation-name: radarglow;
-  animation-duration: 5000ms;
-  animation-iteration-count: infinite;
-  animation-timing-function: ease-in-out;
 }
 
 @keyframes glow {
@@ -117,7 +102,7 @@ code {
 @keyframes spin {
   from {
     transform: rotate(0deg);
-    opacity: 0.7;
+    opacity: 0.5;
   }
   to {
     transform: rotate(360deg);

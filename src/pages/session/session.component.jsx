@@ -7,9 +7,9 @@ import "../session/session.style.scss";
 
 const SessionPage = ({ currentUser }) => {
   const [session, setSession] = useState({});
-  const path = window.location.pathname.split("/").slice(-1)[0];
 
   useEffect(() => {
+    const path = window.location.pathname.split("/").slice(-1)[0];
     const unsubscribe = firebase
       .firestore()
       .collection("users")

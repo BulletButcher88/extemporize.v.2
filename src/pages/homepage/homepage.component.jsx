@@ -8,8 +8,6 @@ const HomePage = ({ currentUser }) => {
   return (
     <>
       <div className="homepage">
-        {/* <img className="homeImage" src={Diamond} /> */}
-
         {currentUser ? (
           <Link
             className="btn-enter"
