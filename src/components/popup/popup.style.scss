@@ -11,6 +11,7 @@ $background: white;
   bottom: 0;
   margin: auto;
   display: flex;
+  background-color: black;
 }
 
 .close_btn {
@@ -24,6 +25,7 @@ $background: white;
 /* GRID LAYOUT  */
 
 .container {
+  background-color: black;
   justify-content: space-around;
   margin: 1px;
   height: 100vh;

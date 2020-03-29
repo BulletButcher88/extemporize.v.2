@@ -1,14 +1,15 @@
 .sign-up {
   background: url("../../asset/instructions.png") no-repeat;
-  height: 101.3vh;
+  height: 100.2vh;
+  width: 100.2vw;
   background-size: 40vh;
   background-position: center;
-  width: 100%;
   min-width: 70vw;
-  padding: 2vh;
+  padding-top: 5%;
   text-align: center;
 
   .title {
+    color: grey;
     margin: 1vh 0;
   }
   .input-inline {
@@ -17,5 +18,5 @@
 }
 
 .google-btn {
-  margin-top: 1vh;
+  margin-top: 1.4vh;
 }

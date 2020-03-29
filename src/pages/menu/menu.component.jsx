@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from "react-router-dom";
+
 import firebase, { auth } from "../../firebase/firebase";
-import "../menu/menu.style.scss";
+
 import { usePosition } from "../../components/geolocation/position";
+import ReactMapGL from "react-map-gl";
+
 import defimage from "../../asset/serveimage.png";
+import "../menu/menu.style.scss";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const FetchSessions = () => {
   const [session, setSession] = useState([]);
@@ -28,6 +32,14 @@ const FetchSessions = () => {
 
 const SessionList = position => {
   const { latitude, longitude } = position.position;
+  const [viewport, setViewport] = useState({
+    latitude: latitude,
+    longitude: longitude,
+    width: "100vw",
+    height: "100vh",
+    zoom: 10
+  });
+
   const openSessions = FetchSessions();
 
   const proxyFilter = (pos1, pos2) => {
@@ -36,44 +48,48 @@ const SessionList = position => {
 
   return (
     <>
-      <div className="proxy-scanner" />
-      <div className="proxy-flash" />
-      {openSessions.map((post, id) => (
-        <Link key={id} to={`/session/${post.id}`}>
-          {post.data ? (
-            <img
-              key={id}
-              src={post.data[0].photoURL}
-              alt={defimage}
-              style={{
-                width: 50,
-                height: 50,
-                borderRadius: "50%",
-                zIndex: { id },
-                position: "absolute",
-                bottom: `${proxyFilter(post.position.latitude, latitude) +
-                  45}%`,
-                left: `${proxyFilter(post.position.longitude, longitude) + 45}%`
-              }}
-            />
-          ) : (
-            <img
-              key={id}
-              src={defimage}
-              alt={defimage}
-              style={{
-                width: 50,
-                height: 50,
-                borderRadius: "50%",
-                zIndex: { id },
-                position: "absolute",
-                bottom: "35%",
-                left: "47vw"
-              }}
-            />
-          )}
-        </Link>
-      ))}
+      <ReactMapGL
+        {...viewport}
+        mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
+      >
+        {openSessions.map((post, id) => (
+          <Link key={id} to={`/session/${post.id}`}>
+            {post.data ? (
+              <img
+                key={id}
+                src={post.data[0].photoURL}
+                alt={defimage}
+                style={{
+                  width: 50,
+                  height: 50,
+                  borderRadius: "50%",
+                  zIndex: { id },
+                  position: "absolute",
+                  bottom: `${proxyFilter(post.position.latitude, latitude) +
+                    45}%`,
+                  left: `${proxyFilter(post.position.longitude, longitude) +
+                    45}%`
+                }}
+              />
+            ) : (
+              <img
+                key={id}
+                src={defimage}
+                alt={defimage}
+                style={{
+                  width: 50,
+                  height: 50,
+                  borderRadius: "50%",
+                  zIndex: { id },
+                  position: "absolute",
+                  bottom: "35%",
+                  left: "47vw"
+                }}
+              />
+            )}
+          </Link>
+        ))}
+      </ReactMapGL>
     </>
   );
 };
@@ -115,7 +131,6 @@ export default function MenuPage({ currentUser }) {
             role="status"
             style={{ position: "absolute", top: "35%", left: "47vw" }}
           />
-          <div className="spin-container"></div>
           <div className="sign-out" onClick={() => auth.signOut()}>
             SIGN OUT
           </div>

@@ -23,7 +23,12 @@ class RemotePopUp extends Component {
     return (
       <div>
         {!this.state.showPopup ? (
-          <button onClick={this.togglePopup.bind(this)}> Launch Remote</button>
+          <button
+            className="popup-button"
+            onClick={this.togglePopup.bind(this)}
+          >
+            Launch Remote
+          </button>
         ) : null}
         {this.state.showPopup ? (
           <>
