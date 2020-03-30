@@ -1,8 +1,8 @@
 .note-wheel {
-  overflow: hidden;
-  background-color: transparent;
-  display: flex;
-  justify-content: center;
   height: 100%;
   width: 100%;
+  overflow: hidden;
+  position: absolute;
+  display: flex;
+  justify-content: center;
 }

@@ -38,9 +38,7 @@ class App extends React.Component {
           path="/"
           render={props => <HomePage {...props} currentUser={currentUser} />}
         />
-        {!currentUser ? (
-          <SignInAndSignUpPage />
-        ) : (
+        {currentUser ? (
           <Switch>
             <Route
               exact
@@ -57,12 +55,14 @@ class App extends React.Component {
               )}
             />
           </Switch>
+        ) : (
+          <SignInAndSignUpPage />
         )}
-        <Route
+        {/* <Route
           exact
           path="/session"
           render={props => <SessionPage {...props} currentUser={currentUser} />}
-        />
+        /> */}
       </Switch>
     );
   }

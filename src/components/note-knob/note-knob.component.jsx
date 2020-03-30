@@ -17,19 +17,19 @@ export default function NoteKnob(props, { onChange }) {
         name="set-note"
         value={stepValue(value)}
         onChange={v => setValue(stepValue(v))}
-        backgroundColor="transparent"
-      />
-      <text
-        x={100}
-        y={90}
-        textAnchor="middle"
-        dy="0.7em"
-        fontWeight="bold"
-        fill="white"
-        backgroundColor="rgba(52, 52, 52, alpha)"
       >
-        {keyNote}
-      </text>
+        <CircularThumb fill="white" />
+        <text
+          className="note-text"
+          // textAnchor="center"
+          x={45}
+          y={45}
+          dy="0.7em"
+          fontWeight="2rem"
+        >
+          {keyNote}
+        </text>
+      </CircularInput>
     </div>
   );
 
